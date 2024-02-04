@@ -1,0 +1,22 @@
+@import '../../assets/styles/variables.scss';
+
+.tools {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 8px;
+    flex-wrap: nowrap;
+    position: relative;
+
+    &__switches {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: nowrap;
+    }
+
+    &__volume {
+        position: relative;
+    }
+}
