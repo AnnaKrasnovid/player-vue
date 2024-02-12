@@ -7,18 +7,26 @@
                 onTimeUpdate={updateProgress}
                 onEnded={nextSong}
             /> -->
-            <!-- <Image isPlaySong={isPlaySong} /> -->
+            <ImagePlayer :isPlaySong="false" />
             <div class='player__box' >
                 <!-- <HeadingSong />
                <Like type='like' callback={() => deleteFromFavorites(activeSong.id)} />  -->
             </div>
-             <Tools  @prevSong='()=> console.log("fdjhg")'  />
-           <!-- <AudioTrack changeTime={changeTime} /> -->
+            <Tools  
+                @prevSong='()=> console.log("prevSong")'  
+                @nextSong='()=> console.log("nextSong")' 
+                @pauseSong='()=> console.log("pauseSong")' 
+                @playSong='()=> console.log("playSong")' 
+                @changeVolume='()=> console.log("changeVolume")'  
+            />
+           <PlayerTrack changeTime={changeTime} />
         </div>
 </template>
 
 <script setup lang="ts">
 import Tools from '@/components/Tools/Tools.vue'
+import ImagePlayer from '@/components/PlayerImage/PlayerImage.vue'
+import PlayerTrack from '@/components/PlayerTrack/PlayerTrack.vue'
 </script>
 
 <style scoped lang="scss">

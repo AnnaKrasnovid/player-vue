@@ -1,15 +1,27 @@
 <template>
- <div class='tools' >
-            <VButtonPlayer icon='arrows'  @callback='emit("prevSong")' />
+    <div class='tools' >
+        <VButtonPlayer 
+            icon='arrows'  
+            @callback='emit("prevSong")' 
+        />
             <div class='tools__switches' >
-                <VButtonPlayer icon='prev' @callback='emit("prevSong")' />
+                <VButtonPlayer 
+                    icon='prev' 
+                    @callback='emit("prevSong")' 
+                />
                 <VButtonPlayer
                     :icon="isPlaySong ? 'pause' : 'play'"
                     @callback='isPlaySong ? emit("pauseSong") : emit("playSong")'
                 />
-                <VButtonPlayer icon='next' @callback='emit("nextSong")' />
+                <VButtonPlayer 
+                    icon='next' 
+                    @callback='emit("nextSong")' 
+                />
             </div>
-            <VButtonPlayer icon='volume' @callback='emit("openModal")' />
+            <VButtonPlayer 
+                icon='volume' 
+                @callback='()=>console.log("openModal")' 
+            />
             <!-- <Tooltip isOpen={isActive} refElement={ref}>
                 <Sound callback={changeVolume} />
             </Tooltip> -->

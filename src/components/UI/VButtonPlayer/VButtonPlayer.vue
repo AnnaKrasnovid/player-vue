@@ -13,14 +13,20 @@
         }"
 		@click="emit('callback')"
 	>	
+    <VIconArrows v-if="icon ==='arrows'"/>
+    <VIconLike v-if="icon ==='like'"/>
+    <VIconPrev v-if="icon ==='next'"/>
+    <VIconPause v-if="icon ==='pause'"/>
+    <VIconPrev v-if="icon ==='prev'"/>
+    <VIconPlay v-if="icon ==='play'"/>
+    <VIconVolume v-if="icon ==='volume'"/>
 	</button>
 </template>
 
 <script setup lang="ts">
-import { toRefs, defineProps, defineEmits, withDefaults } from 'vue';
-import VIconArrowsVue from '../VIcons/VIconArrows.vue';
+import { toRefs, defineProps, defineEmits } from 'vue';
+import VIconArrows from '../VIcons/VIconArrows.vue';
 import VIconLike from '../VIcons/VIconLike.vue';
-import VIconNext from '../VIcons/VIconNext.vue';
 import VIconPause from '../VIcons/VIconPause.vue';
 import VIconPlay from '../VIcons/VIconPlay.vue';
 import VIconPrev from '../VIcons/VIconPrev.vue';
@@ -32,7 +38,7 @@ type Props = {
 }
 
 const props = defineProps<Props>()
-const emit=defineEmits(['callback']);
+const emit = defineEmits(['callback']);
 
 const { icon } = toRefs(props)
 
@@ -40,11 +46,7 @@ const { icon } = toRefs(props)
 </script>
 
 <style scoped lang="scss">
-  .button {
-    // background-color: $color-primary;
-    background-repeat: no-repeat;
-    background-size: 28px;
-    background-position: center;
+  .button {   
     border-radius: 50%;
     width: 64px;
     height: 64px;
@@ -58,39 +60,30 @@ const { icon } = toRefs(props)
     }
 
     &_icon {
-        &_prev {
-            background-image: url(../../../assets/images/icons/rewind-back.svg);
+        &_prev {           
             transform: scale(-1, 1);
             opacity: 0.8;
         }
 
-        &_play {
-            background-image: url(../../../assets/images/icons/pause-stream.svg);
-            background-size: 42px;
+        &_play {           
             width: 70px;
             height: 70px;
         }
 
-        &_pause {
-            background-image: url(../../../assets/images/icons/pause.svg);
+        &_pause {            
             width: 70px;
             height: 70px;
         }
 
-        &_next {
-            background-image: url(../../../assets/images/icons/rewind-back.svg);
+        &_next {          
             opacity: 0.8;
         }
 
         &_volume {
-            background-image: url(../../../assets/images/icons/volume-loud.svg);
-            background-size: 24px;
             opacity: 0.5;
         }
 
         &_arrows {
-            background-image: url(../../../assets/images/icons/arrows.svg);
-            background-size: 30px;
             opacity: 0.5;
         }
     }
