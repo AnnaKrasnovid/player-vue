@@ -46,7 +46,8 @@ const progressWidth = ref<number>(0)
 // } = useDragAndDrop(handleClickProgress);
 
 function handleClickProgress(e: any) {
-  const element = ref.current.getBoundingClientRect()
+  const element = refProgress.value.getBoundingClientRect()
+  
   const width = element.width
   const clickX = e.clientX - element.left;
   const currentTimeClick = clickX * allProgress / width;

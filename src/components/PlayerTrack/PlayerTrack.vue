@@ -4,7 +4,7 @@
                 {{getCurrentTime(currentTime)}}
             </p>
             <VProgress
-                @callback='changeTime'
+                @callback='emit("changeTime", $event)'
                 :currentProgress='currentTime'
                 :allProgress='duration'
                 :point='false'
@@ -16,6 +16,8 @@
 </template>
 
 <script setup lang="ts">
+import { defineEmits } from 'vue';
+
 import VProgress from '@/components/UI/VProgress/VProgress.vue'
 import { getTime } from '@/helpers/getTime/getTime';
 import { getCurrentTime } from '@/helpers/getCurrentTime/getCurrentTime';
@@ -23,7 +25,7 @@ import { getCurrentTime } from '@/helpers/getCurrentTime/getCurrentTime';
 
 const currentTime = 160;
 const duration = 356;
-
+const emit = defineEmits(['changeTime'])
 </script>
 
 <style scoped lang="scss">
