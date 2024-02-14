@@ -11,7 +11,7 @@
                 ref='refProgress'
                 @click='(e) => handleClickProgress(e)'
             >
-                <div class='progress__progress' :class="{'progress__progress_type_point':point}" 
+                <div class='progress__progress' :class="{'progress__progress_type_point': point}" 
                     :style='{ width: `${progressWidth}%` }'
                 >
                 </div>
@@ -21,6 +21,7 @@
 
 <script setup lang="ts">
 import { ref, withDefaults, defineProps, toRefs, defineEmits, watch } from 'vue';
+import { useDragAndDrop } from '@/composables/useDragAndDrop';
 
 type Props = {
   point?: boolean,
@@ -38,35 +39,35 @@ const { allProgress, currentProgress } = toRefs(props)
 
 const refProgress = ref<any>();
 const progressWidth = ref<number>(0)
-// const {
-//   handlerMouseDown,
-//   handlerMouseleave,
-//   handlerMouseUp,
-//   handlerMouseMove,
-// } = useDragAndDrop(handleClickProgress);
+const {
+  handlerMouseDown,
+  handlerMouseleave,
+  handlerMouseUp,
+  handlerMouseMove,
+} = useDragAndDrop(handleClickProgress);
 
 function handleClickProgress(e: any) {
   const element = refProgress.value.getBoundingClientRect()
   
   const width = element.width
   const clickX = e.clientX - element.left;
-  const currentTimeClick = clickX * allProgress / width;
+  const currentTimeClick = clickX * allProgress.value / width;
 
-  if (currentTimeClick >= 0 && currentTimeClick <= allProgress) {
-    progressWidth.value = currentTimeClick * 100 / allProgress;    
+  if (currentTimeClick >= 0 && currentTimeClick <= allProgress.value) {
+    progressWidth.value = currentTimeClick * 100 / allProgress.value;    
     emit('callback', currentTimeClick)
   }
 }
 
 const getWidth = () => {
-  if (currentProgress === 0) {
+  if (currentProgress.value === 0) {
     progressWidth.value = 0;
   } else {
-    progressWidth.value = currentProgress * 100 / allProgress;
+    progressWidth.value = currentProgress.value * 100 / allProgress.value;
   }
 };
 
-watch(currentProgress, ()=> {
+watch(()=>currentProgress.value, ()=> {
   getWidth();
 }, { immediate:true })
 

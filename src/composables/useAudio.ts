@@ -1,9 +1,11 @@
 import { watch, ref } from 'vue';
 
+import { useActiveSong } from '@/store/activeSong'
+
 export interface AudioInt {
   refAudio: any,
   indexSong: number,
-  isPlaySong: boolean,
+  // isPlaySong: boolean,
   volume:number,
   playSong: () => void,
   pauseSong: () => void,
@@ -22,14 +24,10 @@ export interface SongInt {
 }
 
 export function useAudio(songs: Array<SongInt>) {
+  const { changePlaybackSong } = useActiveSong()
   const refAudio = ref<HTMLAudioElement>();
-  //   const { changePlaybackSong } = useActions();
-  //   const [indexSong, setIndexSong] = useState<number>(0);
   const indexSong = ref<number>(0);
-  const isPlaySong = ref<boolean>(false);
   const volume = ref<number>(0.5);
-  //   const [isPlaySong, setIsPlaySong] = useState<boolean>(false);
-  //   const [volume, setVolume] = useState<number>(0.5);
 
   const prevSong = () => {
     if (indexSong.value === 0) {
@@ -43,29 +41,24 @@ export function useAudio(songs: Array<SongInt>) {
 
   const nextSong = () => {
     if (indexSong.value === songs.length - 1) {
-    //   setIndexSong(0);
       indexSong.value = 0
     } else {
-    //   setIndexSong(prev => prev + 1);
       indexSong.value = indexSong.value +1
     }
+    console.log(indexSong.value)
   }
 
   const playSong = () => {
     if (refAudio.value) {
       refAudio.value.play();
-      //   setIsPlaySong(true);
-      isPlaySong.value = true
-    //   changePlaybackSong({ isPlaySong: true });
+      changePlaybackSong(true);
     }
   }
 
   const pauseSong = () => {
     if (refAudio.value) {
       refAudio.value.pause();
-      //   setIsPlaySong(false);
-      isPlaySong.value = false
-    //   changePlaybackSong({ isPlaySong: false });           
+      changePlaybackSong(false);           
     }
   }
 
@@ -78,14 +71,12 @@ export function useAudio(songs: Array<SongInt>) {
   const changeVolume = (vol: number) => {
     if (refAudio.value) {
       refAudio.value.volume = vol;
-      //   setVolume(volume);
       volume.value  = vol
     }
   }
 
   watch(refAudio, ()=> {
     if (refAudio.value) {
-    //   changeVolume(volume);
       volume.value  = 0.5
     }
   })
@@ -93,7 +84,7 @@ export function useAudio(songs: Array<SongInt>) {
   return {
     refAudio,
     indexSong,
-    isPlaySong,
+    // isPlaySong,
     volume,
     playSong,
     pauseSong,

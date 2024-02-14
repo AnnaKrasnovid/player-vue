@@ -4,7 +4,7 @@ const initialState = {
   activeSong: null,
   duration: 0,
   currentTime: 0,
-  isPlaySong:false,
+  isPlaySong: false,
 }
 
 export const useActiveSong = defineStore('songStore', {
@@ -14,7 +14,6 @@ export const useActiveSong = defineStore('songStore', {
   getters: {},
   actions: {
     switchSong(value:any) {
-      // console.log('value', value)
       this.song.activeSong = value;
     },
     getDuration(value:any) {

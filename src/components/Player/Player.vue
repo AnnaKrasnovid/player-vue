@@ -18,7 +18,7 @@
                 @pauseSong='pauseSong' 
                 @playSong='playSong' 
                 @changeVolume='changeVolume'  
-                :isPlaySong='isPlaySong'
+                :isPlaySong='song.isPlaySong'
             />
            <PlayerTrack @changeTime='changeTime'/>
         </div>
@@ -32,14 +32,14 @@ import PlayerHeading from '@/components/PlayerHeading/PlayerHeading.vue'
 import { useAudio } from '@/composables/useAudio'
 import { useActiveSong } from '@/store/activeSong'
 import { useSongs } from '@/store/songs'
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 
 const { switchSong, getDuration, updateCurrentTime, song } = useActiveSong();
 const { songs } = useSongs();
 
 const {
   refAudio,
-  isPlaySong,
+  // isPlaySong,
   indexSong,
   volume,
   playSong,
@@ -52,21 +52,32 @@ const {
 
 const getSongDuration = () => {
   if (refAudio.value) {
-    // getDuration({ duration: refAudio.value.duration });
+    getDuration(refAudio.value.duration);
   }
 }
 const updateProgress = () => {
-//   updateCurrentTime({ currentTime: refAudio.value.currentTime })
+  updateCurrentTime(refAudio.value.currentTime)
 };
 
 const changeActiveSong = () => {
-//   switchSong({ song: songs[indexSong] });
+  console.log('songs.songs[indexSong]', songs.songs[indexSong.value])
+  switchSong(songs.songs[indexSong.value]);
 }
+
+watch(()=>indexSong.value, ()=> {
+  console.log(song.isPlaySong)
+  if (song.isPlaySong) {
+    changeActiveSong()
+  }
+})
+// watch(()=>song.isPlaySong, ()=> {
+//   console.log(song.isPlaySong)
+// })
 
 onMounted(()=> {
   switchSong(songs.songs[0]);
   //   console.log('songs', songs.songs[0])
-  console.log(song.activeSong)
+  // console.log('song.activeSong', song)
 })
 </script>
 

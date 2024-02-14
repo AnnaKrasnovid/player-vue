@@ -1,16 +1,16 @@
 <template>
     <div className='audio'>
             <p className='audio__time'>
-                {{getCurrentTime(currentTime)}}
+                {{getCurrentTime(song.currentTime)}}
             </p>
             <VProgress
                 @callback='emit("changeTime", $event)'
-                :currentProgress='currentTime'
-                :allProgress='duration'
+                :currentProgress='song.currentTime'
+                :allProgress='song.duration'
                 :point='false'
             />
             <p className='audio__time audio__time_type_duration'>
-                {{getTime(duration)}}
+                {{getTime(song.duration)}}
             </p>
         </div>
 </template>
@@ -21,10 +21,10 @@ import { defineEmits } from 'vue';
 import VProgress from '@/components/UI/VProgress/VProgress.vue'
 import { getTime } from '@/helpers/getTime/getTime';
 import { getCurrentTime } from '@/helpers/getCurrentTime/getCurrentTime';
-//const { duration, currentTime } = useSelector((state: any) => state.activeSong);
+import { useActiveSong } from '@/store/activeSong'
 
-const currentTime = 160;
-const duration = 356;
+const { song } = useActiveSong();
+
 const emit = defineEmits(['changeTime'])
 </script>
 
