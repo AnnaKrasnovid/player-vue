@@ -36,9 +36,6 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits(['callback'])
 const { allProgress, currentProgress } = toRefs(props)
-
-const refProgress = ref<any>();
-const progressWidth = ref<number>(0)
 const {
   handlerMouseDown,
   handlerMouseleave,
@@ -46,10 +43,13 @@ const {
   handlerMouseMove,
 } = useDragAndDrop(handleClickProgress);
 
+const refProgress = ref<any>();
+const progressWidth = ref<number>(0);
+
 function handleClickProgress(e: any) {
-  const element = refProgress.value.getBoundingClientRect()
+  const element = refProgress.value.getBoundingClientRect();
   
-  const width = element.width
+  const width = element.width;
   const clickX = e.clientX - element.left;
   const currentTimeClick = clickX * allProgress.value / width;
 
@@ -69,7 +69,7 @@ const getWidth = () => {
 
 watch(()=>currentProgress.value, ()=> {
   getWidth();
-}, { immediate:true })
+}, { immediate: true })
 
 </script>
 

@@ -18,7 +18,8 @@
                 @pauseSong='pauseSong' 
                 @playSong='playSong' 
                 @changeVolume='changeVolume'  
-                :isPlaySong='song.isPlaySong'
+                :isPlaySong='song.isPlaySong'                
+                :volume='volume'
             />
            <PlayerTrack @changeTime='changeTime'/>
         </div>
@@ -48,7 +49,7 @@ const {
   nextSong,
   changeTime,
   changeVolume,
-} = useAudio(songs);
+} = useAudio(songs.songs);
 
 const getSongDuration = () => {
   if (refAudio.value) {
@@ -60,24 +61,28 @@ const updateProgress = () => {
 };
 
 const changeActiveSong = () => {
-  console.log('songs.songs[indexSong]', songs.songs[indexSong.value])
   switchSong(songs.songs[indexSong.value]);
 }
 
 watch(()=>indexSong.value, ()=> {
   console.log(song.isPlaySong)
-  if (song.isPlaySong) {
-    changeActiveSong()
-  }
+  // if (song.isPlaySong) {
+  changeActiveSong()
+  // }
 })
 // watch(()=>song.isPlaySong, ()=> {
 //   console.log(song.isPlaySong)
 // })
 
+watch(()=>[song.activeSong, song.isPlaySong], ()=> {
+  console.log(song.isPlaySong)
+  if (song.isPlaySong) {
+    playSong();
+  }
+})
+
 onMounted(()=> {
   switchSong(songs.songs[0]);
-  //   console.log('songs', songs.songs[0])
-  // console.log('song.activeSong', song)
 })
 </script>
 

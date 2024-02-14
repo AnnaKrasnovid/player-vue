@@ -31,12 +31,11 @@ export function useAudio(songs: Array<SongInt>) {
 
   const prevSong = () => {
     if (indexSong.value === 0) {
-    //   setIndexSong(songs.length - 1);
       indexSong.value = songs.length - 1
     } else {
-    //   setIndexSong(prev => prev - 1);
       indexSong.value = indexSong.value - 1
     }
+    console.log(indexSong.value)
   }
 
   const nextSong = () => {
@@ -44,8 +43,7 @@ export function useAudio(songs: Array<SongInt>) {
       indexSong.value = 0
     } else {
       indexSong.value = indexSong.value +1
-    }
-    console.log(indexSong.value)
+    }    
   }
 
   const playSong = () => {
