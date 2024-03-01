@@ -1,15 +1,17 @@
 <template>
   <div className='heading'>
             <h1 className='heading__name'>
-               {{activeSong.author}}
+               {{song.activeSong?.author ? song.activeSong.author: ''}}
             </h1>
-            <p className='heading__title'>{{activeSong.title}}</p>
+            <p className='heading__title'>{{song.activeSong?.title ? song.activeSong.title : ''}}</p>
         </div>
 </template>
 
 <script setup lang="ts">
-//const { activeSong } = useSelector((state: any) => state.activeSong);
-const activeSong = { author:'author', title:'title' }
+import { useActiveSong } from '@/store/activeSong'
+
+const { song } = useActiveSong()
+console.log(song)
 </script>
 
 <style scoped lang="scss">

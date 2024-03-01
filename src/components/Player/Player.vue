@@ -7,7 +7,7 @@
                 @timeupdate='updateProgress'
                 @ended='nextSong'
             />
-            <ImagePlayer :isPlaySong="false" />
+            <ImagePlayer :isPlaySong="song.isPlaySong" />
             <div class='player__box' >
                <PlayerHeading />
                <!--  <Like type='like' callback={() => deleteFromFavorites(activeSong.id)} />  -->
@@ -34,6 +34,7 @@ import { useAudio } from '@/composables/useAudio'
 import { useActiveSong } from '@/store/activeSong'
 import { useSongs } from '@/store/songs'
 import { onMounted, watch } from 'vue'
+import Song from '../Song/Song.vue'
 
 const { switchSong, getDuration, updateCurrentTime, song } = useActiveSong();
 const { songs } = useSongs();
@@ -61,28 +62,35 @@ const updateProgress = () => {
 };
 
 const changeActiveSong = () => {
+  // console.log(songs.songs[indexSong.value])
   switchSong(songs.songs[indexSong.value]);
 }
 
 watch(()=>indexSong.value, ()=> {
-  console.log(song.isPlaySong)
-  // if (song.isPlaySong) {
-  changeActiveSong()
-  // }
+  // console.log(song.activeSong)
+  if (song.activeSong) {
+    changeActiveSong()
+  }
 })
 // watch(()=>song.isPlaySong, ()=> {
 //   console.log(song.isPlaySong)
 // })
 
-watch(()=>[song.activeSong, song.isPlaySong], ()=> {
-  console.log(song.isPlaySong)
+watch(()=>[indexSong.value,  song.isPlaySong], ()=> {
+ 
   if (song.isPlaySong) {
+    // console.log('1 refAudio', song.isPlaySong, refAudio)
+    // console.log('refAudio', refAudio)
     playSong();
+    // console.log('2 refAudio', song.isPlaySong, refAudio)
   }
+ 
 })
 
 onMounted(()=> {
+  console.log(songs.songs[0])
   switchSong(songs.songs[0]);
+  console.log(songs.songs[0])
 })
 </script>
 

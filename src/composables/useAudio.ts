@@ -35,7 +35,6 @@ export function useAudio(songs: Array<SongInt>) {
     } else {
       indexSong.value = indexSong.value - 1
     }
-    console.log(indexSong.value)
   }
 
   const nextSong = () => {
@@ -44,19 +43,20 @@ export function useAudio(songs: Array<SongInt>) {
     } else {
       indexSong.value = indexSong.value +1
     }    
+    // console.log(indexSong.value)
   }
 
   const playSong = () => {
-    if (refAudio.value) {
-      refAudio.value.play();
+    if (refAudio.value) {     
+      refAudio.value?.play();
       changePlaybackSong(true);
     }
   }
 
   const pauseSong = () => {
-    if (refAudio.value) {
+    if (refAudio.value) {        
       refAudio.value.pause();
-      changePlaybackSong(false);           
+      changePlaybackSong(false);              
     }
   }
 

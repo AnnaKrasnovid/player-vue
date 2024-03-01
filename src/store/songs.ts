@@ -6,7 +6,7 @@ const initialState = {
   songs: songs,
 }
 
-export const useSongs = defineStore('postsStore', {
+export const useSongs = defineStore('songsStore', {
   state: () => ({
     songs: initialState,
   }),
