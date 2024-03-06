@@ -34,6 +34,7 @@ type Props = {
 };
 const props = defineProps<Props>();
 const { isActive } = toRefs(props);
+
 const { switchSong } = useActiveSong();
 const { songs } = useSongs();
 

@@ -1,20 +1,22 @@
-import styles from './SoundBar.module.scss';
+<template>
+  <ul class="bars">
+    <li class="bars__item"></li>
+    <li class="bars__item"></li>
+    <li class="bars__item"></li>
+    <li class="bars__item"></li>
+    <li class="bars__item"></li>
+    <li class="bars__item"></li>
+    <li class="bars__item"></li>
+    <li class="bars__item"></li>
+    <li class="bars__item"></li>
+    <li class="bars__item"></li>
+  </ul>
+</template>
 
-function SoundBar() {
-    return (
-        <ul className={styles['bars']}>
-            <li className={styles['bars__item']}></li>
-            <li className={styles['bars__item']}></li>
-            <li className={styles['bars__item']}></li>
-            <li className={styles['bars__item']}></li>
-            <li className={styles['bars__item']}></li>
-            <li className={styles['bars__item']}></li>
-            <li className={styles['bars__item']}></li>
-            <li className={styles['bars__item']}></li>
-            <li className={styles['bars__item']}></li>
-            <li className={styles['bars__item']}></li>
-        </ul>
-    );
-}
+<script setup lang="ts">
+</script>
 
-export default SoundBar;
+<style scoped lang="scss">
+  @import './SoundBar.scss'
+</style>
+

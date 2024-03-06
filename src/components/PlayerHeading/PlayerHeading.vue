@@ -11,7 +11,6 @@
 import { useActiveSong } from '@/store/activeSong'
 
 const { song } = useActiveSong()
-console.log(song)
 </script>
 
 <style scoped lang="scss">

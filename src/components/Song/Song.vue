@@ -2,7 +2,7 @@
   <div
     class="song"
     :class="{
-      song_active: activeSong?.id === item.id,
+      'song_active': song.activeSong?.id === item.id,
     }"
   >
     <div class="song__img">
@@ -15,22 +15,28 @@
       <h2 class="song__title">{{ item.author }}</h2>
       <p class="song__text">{{ item.title }}</p>
     </div>
-    <!-- {{activeSong.id === item.id && isPlaySong && <SoundBar />}}  -->
+    <SoundBar v-if="song.activeSong?.id === item.id && song.isPlaySong"/>
+   
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps, toRefs } from "vue";
+import { defineEmits, defineProps, toRefs, watch } from "vue";
 import { useActiveSong } from "@/store/activeSong";
-import Cover from "../../assets/images/images/cover.png";
 
-const { activeSong, isPlaySong } = useActiveSong();
+import SoundBar from '@/components/UI/SoundBar/SoundBar.vue';
+import Cover from "../../assets/images/images/cover.png";
 
 type Props = {
   item: any;
 };
+
 const props = defineProps<Props>();
 const { item } = toRefs(props);
+
+const { song } = useActiveSong();
+
+
 </script>
 
 <style lang="scss">
