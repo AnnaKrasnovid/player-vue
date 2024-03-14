@@ -13,10 +13,7 @@
   >
     <slot />
   </li>
-  <!-- {`
-                ${isActive ? (animationName ? styles[`${animationName}`] : styles['animation-default']) : ''} 
-                ${className ? className : ''}
-            `} -->
+
 </template>
 
 <script setup lang="ts">
@@ -61,5 +58,5 @@ const aninationDuration = elements.value * stepDelay.value;
 </script>
 
 <style lang="scss">
-    @import './Animation.scss';
+  @import './Animation.scss';
 </style>

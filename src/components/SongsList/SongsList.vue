@@ -8,14 +8,8 @@
       :index="index"
       animationName="animation-position"
       :delay="0.2"
-    >
-      <!-- <li
-        v-for="item in list.songs"
-        :key="item.id"
-        @click="emits('change-song', item.id)"
-      > -->
-        <Song :item="item" />
-      <!-- </li> -->
+    >    
+      <Song :item="item" />     
     </Animation>
   </ul>
 </template>
@@ -32,7 +26,7 @@ type Props = {
 
 const props = defineProps<Props>();
 const { list, isActive } = toRefs(props);
-console.log("list", list.value.songs[0], props.list);
+
 const emits = defineEmits(["change-song"]);
 </script>
 

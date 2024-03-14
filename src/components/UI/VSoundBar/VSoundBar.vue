@@ -17,6 +17,6 @@
 </script>
 
 <style scoped lang="scss">
-  @import './SoundBar.scss'
+  @import './VSoundBar.scss';
 </style>
 

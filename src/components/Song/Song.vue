@@ -15,7 +15,7 @@
       <h2 class="song__title">{{ item.author }}</h2>
       <p class="song__text">{{ item.title }}</p>
     </div>
-    <SoundBar v-if="song.activeSong?.id === item.id && song.isPlaySong"/>
+    <VSoundBar v-if="song.activeSong?.id === item.id && song.isPlaySong"/>
    
   </div>
 </template>
@@ -24,7 +24,7 @@
 import { defineEmits, defineProps, toRefs, watch } from "vue";
 import { useActiveSong } from "@/store/activeSong";
 
-import SoundBar from '@/components/UI/SoundBar/SoundBar.vue';
+import VSoundBar from '@/components/UI/VSoundBar/VSoundBar.vue';
 import Cover from "../../assets/images/images/cover.png";
 
 type Props = {
