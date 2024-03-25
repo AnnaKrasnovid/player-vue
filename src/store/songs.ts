@@ -2,13 +2,9 @@ import { defineStore } from "pinia";
 
 import { songs } from "@/assets/appData/songs";
 
-const initialState = {
-  songs: songs,
-}
-
 export const useSongs = defineStore('songsStore', {
   state: () => ({
-    songs: initialState,
+    songs: songs,
   }),
   getters: {},
   actions: {

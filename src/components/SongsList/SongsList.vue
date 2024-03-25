@@ -1,10 +1,10 @@
 <template>
   <ul class="songs-list" :class="{ 'songs-list_inactive': isActive }">
     <Animation
-      v-for="(item, index) in list.songs"
+      v-for="(item, index) in list"
       :key="item.id"
       @callback="()=>emits('change-song', item.id)"
-      :elements="list.songs.length"
+      :elements="list.length"
       :index="index"
       animationName="animation-position"
       :delay="0.2"

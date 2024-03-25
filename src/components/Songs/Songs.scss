@@ -1,6 +1,6 @@
 @import '../../assets/styles/variables.scss';
 
-.songs {
+.box {
     padding: $padding-container;
     padding: 36px 24px 48px;
     overflow: hidden;
@@ -8,10 +8,10 @@
     height: 100%;
     transition: all 0.3s linear;
 
-    &_inactive {
-        transition: all 0.3s linear;
-        background: rgba(0, 0, 0, 0);
-        backdrop-filter: blur(0px);
+    // &_inactive {
+    //     transition: all 0.3s linear;
+    //     background: rgba(0, 0, 0, 0);
+    //     backdrop-filter: blur(0px);
 
-    }
+    // }
 }

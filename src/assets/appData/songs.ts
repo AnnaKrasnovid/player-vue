@@ -36,8 +36,8 @@ export const songs: Array<any> = [
   {
     id: 4,
     audio: AudioFour,
-    author: 'Benjamin Tissot',
-    title: 'Hey',
+    author: 'Rammstein',
+    title: 'Du Hast',
     cover: '',
   },
 ]

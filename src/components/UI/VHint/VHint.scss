@@ -1,0 +1,39 @@
+@import '../../../assets/styles/variables.scss';
+
+.hint-box {
+    position: relative;
+
+    &:hover {
+        .hint {
+            display: flex;
+        }
+    }
+}
+
+.hint {
+    display: none;
+    position: absolute;
+    top: -130%;
+    left: -70%;
+    z-index: 1000;
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, .25);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: $box-shadow;
+    color: #fff;
+    z-index: 1000;
+    //width: 150px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 14px;
+    // &::after {
+    //     content: '';
+    //     border: 6px solid transparent;
+    //     border-top: 6px solid rgba(0, 0, 0, 1);
+    //     position: absolute;
+    //     top: 100%;
+    //     left: calc(50% - 3px);
+    // }
+}

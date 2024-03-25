@@ -1,10 +1,10 @@
 <template>
   <div class="cover">
     <img
-      :src="ImagePlayer"
+      :src="song.activeSong?.cover ? song.activeSong.cover : ImagePlayer"
       alt="Пластинка"
       class="cover__img"
-      :class="{ cover__image_active: isPlaySong }"
+      :class="{ 'cover__image_active': isPlaySong }"
     />
     <!-- activeSong.cover ? activeSong.cover : ImagePlayer -->
   </div>
@@ -13,10 +13,13 @@
 <script setup lang="ts">
 import ImagePlayer from "../../assets/images/images/cover.png";
 
+import { useActiveSong } from '@/store/activeSong';
+
 type Props = {
   isPlaySong: boolean;
-  activeSong: any; // из стора
 };
+
+const { song } = useActiveSong()
 </script>
 
 <style scoped lang="scss">

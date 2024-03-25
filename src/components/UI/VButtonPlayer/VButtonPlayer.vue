@@ -46,47 +46,6 @@ const { icon } = toRefs(props)
 </script>
 
 <style scoped lang="scss">
-  .button {   
-    border-radius: 50%;
-    width: 64px;
-    height: 64px;
-    cursor: pointer;
-    transition: all 0.1s linear;
-
-    &:hover {
-        box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.9);
-        transition: all 0.1s linear;
-        opacity: 1;
-    }
-
-    &_icon {
-        &_prev {           
-            transform: scale(-1, 1);
-            opacity: 0.8;
-        }
-
-        &_play {           
-            width: 70px;
-            height: 70px;
-        }
-
-        &_pause {            
-            width: 70px;
-            height: 70px;
-        }
-
-        &_next {          
-            opacity: 0.8;
-        }
-
-        &_volume {
-            opacity: 0.5;
-        }
-
-        &_arrows {
-            opacity: 0.5;
-        }
-    }
-}
+  @import './VButtonPlayer.scss';
 </style>
 

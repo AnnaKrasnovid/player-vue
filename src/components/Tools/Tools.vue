@@ -17,17 +17,24 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, withDefaults, ref, toRefs, watch } from "vue";
+import {
+  defineProps,
+  defineEmits,
+  withDefaults,
+  ref,
+  toRefs,
+  watch,
+} from "vue";
 
-import PlayerSound from '@/components/PlayerSound/PlayerSound.vue'; 
+import PlayerSound from "@/components/PlayerSound/PlayerSound.vue";
 import VButtonPlayer from "@/components/UI/VButtonPlayer/VButtonPlayer.vue";
 import VTooltip from "@/components/UI/VTooltip/VTooltip.vue";
 
-import { useToggleVisibility } from '@/composables/useToggleVisibility'
+import { useToggleVisibility } from "@/composables/useToggleVisibility";
 
 interface Props {
   isPlaySong: boolean;
-  volume?: number
+  volume?: number;
 }
 
 const emit = defineEmits([
@@ -46,10 +53,13 @@ const { isPlaySong, volume } = toRefs(props);
 
 const { refElement, isActive, openModal, closeModal } = useToggleVisibility(false);
 
-watch(()=> volume.value, ()=> {
-  const timer = setTimeout(() => closeModal(), 500);
-  return () => clearTimeout(timer);
-})
+watch(
+  () => volume.value,
+  () => {
+    const timer = setTimeout(() => closeModal(), 500);
+    return () => clearTimeout(timer);
+  },
+);
 </script>
 
 <style scoped lang="scss">
