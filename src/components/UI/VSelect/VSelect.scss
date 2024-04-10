@@ -1,0 +1,49 @@
+@import '../../../assets/styles/variables.scss';
+
+.dropdown {
+    &__label {
+        margin-bottom: 8px;
+    }
+
+    &__select {
+        width: 100%;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        &_active {
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 5px 5px 0 0;
+        }
+    }
+
+    &__options {
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+        width: calc(100% + 2px);
+        position: absolute;
+        top: 36px;
+        left: -1px;
+        z-index: 1;
+        border-radius: 0 0 5px 5px;
+        border-top: 0;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility .2s linear, opacity .2s linear;
+        overflow: hidden;
+        background: rgba(28, 29, 31, 0.5);
+        border: 1px solid #2B2B2B;
+        box-shadow: 0px 7px 16px rgba(0, 0, 0, 0.25);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        border-radius: 8px;
+        margin-top: 2px;
+
+        &_active {
+            border: 1px solid #424242;
+            visibility: visible;
+            opacity: 1;
+            transition: visibility .2s linear, opacity .2s linear;
+        }
+    }
+}

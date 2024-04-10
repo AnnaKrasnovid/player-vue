@@ -30,7 +30,6 @@ type AnimationOwnProps = {
   delay?: number; // задержка перед началом анимации
   className?: string;
   isActive?: boolean;
-  callback?: (...props: any) => any;
 };
 
 type Props = {
@@ -41,8 +40,8 @@ type Props = {
   delay?: number // задержка перед началом анимации
   className?: string,
   isActive?: boolean,
-  callback?: (...props: any) => any
 };
+
 const props = withDefaults(defineProps<Props>(), {
   stepDelay : 0.2, 
   index:0,
@@ -50,11 +49,13 @@ const props = withDefaults(defineProps<Props>(), {
   className: '',
   isActive: true,
 });
+
 const { animationName, elements, index, stepDelay, className, isActive, delay } = toRefs(props);
 const emits = defineEmits(["callback"]);
 
 let animationDelay = index.value === 0 ? delay.value : (index.value + 1) * stepDelay.value + delay.value;
 const aninationDuration = elements.value * stepDelay.value;
+
 </script>
 
 <style lang="scss">

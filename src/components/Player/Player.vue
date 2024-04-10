@@ -53,7 +53,7 @@ const {
   nextSong,
   changeTime,
   changeVolume,
-} = useAudio(playlistsStore.activePlaylists);
+} = useAudio(playlistsStore.activePlaylists.songs);
 
 
 const getSongDuration = () => {
@@ -82,8 +82,8 @@ watch(() => [indexSong.value, song.isPlaySong], () => {
 });
 
 onMounted(() => { 
-  playlistsStore.addDefaultActivePlaylist(playlistsStore.playlists[0])
-  switchSong(playlistsStore.activePlaylists.songs[0]);
+  // playlistsStore.addDefaultActivePlaylist()
+  switchSong(playlistsStore.activePlaylists?.songs[0]);
 });
 </script>
 

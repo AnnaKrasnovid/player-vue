@@ -1,20 +1,29 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import PlayerPage from '../views/PlayerPage.vue'
+import PlaylistPage from '../views/PlaylistPage.vue'
+import PlaylistsPage from '../views/PlaylistsPage.vue'
+import AddSongsPage from '../views/AddSongsPage.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    name: 'home',
-    component: PlayerPage,
+    path: '/playlist/:id',
+    name: 'playlist',
+    component: PlaylistPage,
   },
-  // {
-  //   path: '/about',
-  //   name: 'about',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  // }
+  {
+    path: '/playlists',
+    name: 'playlists',
+    component: PlaylistsPage,
+  },
+  {
+    path: '/playlists/add',
+    name: 'playlists',
+    component: PlaylistsPage,
+  },
+  {
+    path: '/songs/add',
+    name: 'playlists',
+    component: AddSongsPage,
+  },
 ]
 
 const router = createRouter({

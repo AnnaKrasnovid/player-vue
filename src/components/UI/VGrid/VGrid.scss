@@ -1,0 +1,21 @@
+.box {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content fit-content;
+
+    flex-direction: column;
+    gap: 16px;
+
+    &__list {
+        overflow: auto;
+        max-height: 700px; //подумать !!!
+        height: 100%;
+    }
+}
+
+.box__header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}

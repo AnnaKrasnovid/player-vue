@@ -25,9 +25,10 @@ export interface SongInt {
 
 export function useAudio(songs: Array<SongInt>) {
   const { changePlaybackSong } = useActiveSong()
+  
   const refAudio = ref<HTMLAudioElement>();
   const indexSong = ref<number>(0);
-  const volume = ref<number>(0.5);
+  const volume = ref<number>(0.1);
 
   const prevSong = () => {
     if (indexSong.value === 0) {
@@ -37,7 +38,7 @@ export function useAudio(songs: Array<SongInt>) {
     }
   }
 
-  const nextSong = () => {
+  const nextSong = () => {    
     if (indexSong.value === songs.length - 1) {
       indexSong.value = 0
     } else {
@@ -75,9 +76,9 @@ export function useAudio(songs: Array<SongInt>) {
 
   watch(refAudio, ()=> {
     if (refAudio.value) {
-      volume.value  = 0.5
+      volume.value  = 0.1
     }
-  })
+  }, { deep:true, immediate: true })
 
   return {
     refAudio,

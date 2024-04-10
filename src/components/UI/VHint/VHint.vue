@@ -1,7 +1,7 @@
 <template>
   <div class="hint-box">
     <div class="hint">
-        {{text}}
+        {{ text }}
     </div>
     <slot />
   </div>

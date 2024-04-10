@@ -5,7 +5,9 @@ import { createPinia } from "pinia";
 import '@/assets/styles/index.scss'
 import 'normalize.css';
 
+const pinia = createPinia()
+
 createApp(App)
-  .use(createPinia())
+  .use(pinia)
   .use(router)
   .mount('#app')

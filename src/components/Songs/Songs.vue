@@ -1,28 +1,27 @@
 <template>
-  <div class="box">
-
-    <div class="box__header">
-      <VHint text="Добавить песни">
-        <VButton>
+  <VGrid>
+    <template #header>
+      <!-- <VHint text="Добавить песни"> -->
+        <RouterLink to="/add">
           <VIconAdd />
-        </VButton>
-      </VHint>
-    </div>
+        </RouterLink>
+      <!-- </VHint> -->
+    </template>
 
-    <div class="box__list scroll">
+    <template #body>
       <SongsList
-        :list="playlistsStore.activePlaylists?.songs"
+        :list="songs?.songs"
         @change-song="handleClickSong"
         :isActive="isActive"
       />
-    </div>
-     
-  </div>
+    </template>     
+ </VGrid>
 </template>
 
 <script setup lang="ts">
 import { defineProps, toRefs } from "vue";
 
+import VGrid from "../UI/VGrid/VGrid.vue";
 import SongsList from "@/components/SongsList/SongsList.vue";
 import VButton from "@/components/UI/VButton/VButton.vue";
 import VIconAdd from "@/components/UI/VIcons/VIconAdd.vue";
@@ -30,6 +29,7 @@ import VHint from "@/components/UI/VHint/VHint.vue";
 
 import { useActiveSong } from "@/store/activeSong";
 import { usePlaylists } from "@/store/playlists";
+
 
 interface SongInt {
   id: number;
@@ -40,10 +40,12 @@ interface SongInt {
 }
 
 type Props = {
-  isActive: boolean;
+  isActive?: boolean;
+  songs: any
 };
+
 const props = defineProps<Props>();
-const { isActive } = toRefs(props);
+const { isActive, songs } = toRefs(props);
 
 const { switchSong } = useActiveSong();
 const playlistsStore = usePlaylists();
@@ -54,28 +56,11 @@ const handleClickSong = (id: number) => {
   );
   switchSong(song);
 };
+
+
+
 </script>
 
 <style lang="scss">
-.box {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: min-content fit-content;
- 
-  flex-direction: column;
-  gap: 16px;
 
-  &__list  {
-    overflow: auto;
-     max-height: calc(100% - 200px); //подумать !!!
-  }
-}
-    .box__header {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 12px;
-    }
-
-   
 </style>
