@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import PlaylistPage from '../views/PlaylistPage.vue'
-import PlaylistsPage from '../views/PlaylistsPage.vue'
+import PlaylistsPage from '@/views/PlaylistsPage.vue'
 import AddSongsPage from '../views/AddSongsPage.vue'
 
 const routes: Array<RouteRecordRaw> = [
@@ -14,14 +14,14 @@ const routes: Array<RouteRecordRaw> = [
     name: 'playlists',
     component: PlaylistsPage,
   },
-  {
-    path: '/playlists/add',
-    name: 'playlists',
-    component: PlaylistsPage,
-  },
+  // {
+  //   path: '/playlists/add',
+  //   name: 'playlists',
+  //   component: PlaylistsPage,
+  // },
   {
     path: '/songs/add',
-    name: 'playlists',
+    name: 'add-playlists',
     component: AddSongsPage,
   },
 ]

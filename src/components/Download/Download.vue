@@ -1,35 +1,30 @@
 <template>
-<p>Добавить {{ title }}</p>
-    <!-- v-if="type==='playlist'" -->
-    <input  type="text" placeholder="Введите название"/>
-  <div
-    :class="['download', { 'download_active': dragEnter }]"
-    @drop="handleDragAndDropFiles"
-    @dragleave="overrideEventDefaults"
-    @dragover="overrideEventDefaults"
-    @dragenter="overrideEventDefaults"
-  >
-    
-    <div class="download__content">
-      <p class="download__subtitle">Выберите файл или перетащите его сюда</p>
-      <!-- <p class="download__text">JPG, PNG or PDF</p> -->
-      <!-- <InputDownload @handleChange="handleChange" /> -->
+  <div class="download">
+    <div class="download__box">
+      <h2 class="download__title">
+         {{ title }}
+      </h2>
+      <VInput v-if="type === 'playlist'" @change-input="addTitle" />
     </div>
+
+    <DownloadBox @add-files="addFiles">
+      <VInputDownload @add-files="addFiles" />
+      <DownloadList :files="filesList"/>
+    </DownloadBox>
+
+    <VButton class="button-download" @click="add" :disabled="disabledButton"> 
+      Добавить 
+    </VButton>
   </div>
-  <VButton>Добавить</VButton>
 </template>
 
 <script setup lang="ts">
-import {
-  defineProps,
-  defineEmits,
-  toRefs,
-  ref,
-  withDefaults,
-  onMounted,
-} from "vue";
-import InputDownload from "@/components/UI/InputDownload/InputDownload.vue";
-import VButton from '@/components/UI/VButton/VButton.vue'
+import { defineProps, toRefs, ref, defineEmits, computed, watch } from "vue";
+import VInputDownload from "@/components/UI/VInputDownload/VInputDownload.vue";
+import DownloadBox from "@/components/DownloadBox/DownloadBox.vue";
+import DownloadList from "@/components/DownloadList/DownloadList.vue";
+import VButton from "@/components/UI/VButton/VButton.vue";
+import VInput from "@/components/UI/VInput/VInput.vue";
 
 type Props = {
   type: "songs" | "playlist";
@@ -38,43 +33,65 @@ type Props = {
 
 const props = defineProps<Props>();
 const { type, title } = toRefs(props);
+const emits = defineEmits(["add"]);
 
 const filesList = ref<Array<any>>([]);
-const dragEnter = ref<boolean>(false);
+const titlePlaylist = ref<string>('');
+const disabledButton = ref<boolean>(true);
 
-function handleChange(e: any) {
-  console.log(e.target.files)
-  const filesObj = Object.values(e.target.files);
-  filesList.value = [...filesList.value, ...filesObj];
-  console.log(filesList.value)
+function addFiles(files: any) {
+  filesList.value = [...filesList.value, ...files];
 }
 
-function overrideEventDefaults(event: any) {
-  event.preventDefault();
-  event.stopPropagation();
-  dragEnter.value = true;
-}
+const addTitle = (e) => {
+  titlePlaylist.value = e
+};
 
-function handleDragAndDropFiles(event: any) {
-  console.log(event.dataTransfer.files);
-  overrideEventDefaults(event);
-  dragEnter.value = false;
-  if (!event.dataTransfer) {
-    return;
+function add() {
+  const newPlaylist = { 
+    files: filesList.value, 
+    title: titlePlaylist.value, 
   }
- 
-  handleFiles(event.dataTransfer.files);
-
+  // console.log(newPlaylist)
+  emits('add', newPlaylist)
 }
 
-function handleFiles(fileList: any) {
-  // if (fileList) {
-  //   let files = Array.from(fileList);
-  //   filesList.value = [...filesList.value, ...files];
-  // }
-}
+watch(()=> [titlePlaylist.value, filesList.value], ()=> {
+  if (type === 'playlist' && titlePlaylist.value.length === 0) {
+    disabledButton.value = true   
+  } else if(type === 'songs' && filesList.value.length > 0) {
+    disabledButton.value = true
+  } else {
+    disabledButton.value = false
+  }
+})
 </script>
 
 <style scoped lang="scss">
 @import './Download.scss';
+
+.download {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: min-content  1fr min-content;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-between;
+  gap: 32px;
+
+  &__title {
+    font-size: 24px;
+  }
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.button-download {
+  justify-self: end;
+}
 </style>

@@ -1,0 +1,62 @@
+<template>
+  <div class="input-box">
+    <label v-if="title" class="input-box__label">
+      {{ title }}
+    </label>
+    <div class="input-box__container">
+      <input
+        v-model="value"
+        :type="type"
+        :placeholder="placeholder"
+        @input="emits('change-input', value)"
+        class="input-box__input"
+      />
+      <button v-if="valueLength" class="button-clear" type="button" @click="clearInput">
+        <VIconClose size="small" />
+      </button>
+    </div>
+    <VError :error="error" />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { defineProps, toRefs, withDefaults, ref, defineEmits, computed, watch } from "vue";
+import VIconClose from "../VIcons/VIconClose.vue";
+import VError from "@/components/UI/VError/VError.vue"
+
+type Props = {
+  type?: string;
+  placeholder?: string;
+  title?: string;
+};
+
+const props = withDefaults(defineProps<Props>(), {
+  type: "text",
+  placeholder: "Введите название",
+});
+
+const { type, placeholder, title } = toRefs(props);
+const emits = defineEmits(["change-input"]);
+
+const value = ref<string>("");
+const error = ref<string>("")
+
+const valueLength = computed(() => value.value.length)
+
+const clearInput = () => {
+  value.value = ''
+};
+
+watch(()=> value.value, () => {
+  // TODO: доработать инпут, показ ошибок
+  if(!value.value.length) {
+    error.value = "Поле не должно быть пустым"
+  } else {
+    error.value = ''
+  }
+} )
+</script>
+
+<style scoped lang="scss">
+  @import './VInput.scss';
+</style>

@@ -1,7 +1,7 @@
 <template>
 	<svg
-		width="16"
-		height="16"
+		:width="size === 'middle' ? 16 : 8"
+		:height="size === 'middle' ? 16 : 8"
 		viewBox="0 0 20 20"
 		fill="none"
 		xmlns="http://www.w3.org/2000/svg"
@@ -14,7 +14,21 @@
 </template>
 
 <script setup lang="ts">
+import {
+  defineProps,
+  toRefs,
+  withDefaults,
+} from "vue";
 
+type Props = {
+  size?: "small" | "middle";
+};
+
+const props = withDefaults(defineProps<Props>(), {
+  size: "middle",
+});
+
+const { size } = toRefs(props);
 </script>
 
 <style scoped lang="scss">

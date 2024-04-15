@@ -1,9 +1,9 @@
 <template>
-  <Download title="песни" type="songs" />
+  <DownloadSongs />
 </template>
 
 <script setup lang="ts">
-import Download from "@/components/Download/Download.vue";
+import DownloadSongs from "@/components/DownloadSongs/DownloadSongs.vue";
 </script>
 
 <style scoped lang="scss">

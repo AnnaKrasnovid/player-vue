@@ -43,5 +43,15 @@ export const usePlaylists = defineStore('usePlaylists', {
     //   //@ts-ignore
     //   this.activePlaylists = this.playlists[0]
     // },
+
+    addNewSongs(playlistId:string, songs:any) {
+      // @ts-ignore
+      this.playlists.map((i)=> {
+        console.log(i.id, playlistId)
+        if(i.id === playlistId) {           
+          i.songs.push(...songs)          
+        }      
+      })
+    },
   },
 })

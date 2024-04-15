@@ -2,7 +2,7 @@
   <VGrid>
     <template #header>
       <!-- <VHint text="Добавить песни"> -->
-        <RouterLink to="/add">
+        <RouterLink :to="{ path: '/songs/add', query: { playlist: songs.id } }">
           <VIconAdd />
         </RouterLink>
       <!-- </VHint> -->
@@ -49,7 +49,7 @@ const { isActive, songs } = toRefs(props);
 
 const { switchSong } = useActiveSong();
 const playlistsStore = usePlaylists();
-
+console.log(songs)
 const handleClickSong = (id: number) => {
   const song = playlistsStore.activePlaylists.songs.find(
     (item: SongInt) => item.id === id,

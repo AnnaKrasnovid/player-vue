@@ -1,9 +1,11 @@
 <template>
-  <div class="header">
-    <RouterLink to="/playlists"> Плейлисты </RouterLink>
+  <header class="header">
+    <RouterLink to="/playlists" class="link"> 
+      Плейлисты 
+    </RouterLink>
 
     <VHint text="Сменить тему">
-      <VSelect :options="themes" :showArrow="false" />
+      <VSelect :options="themes" :showArrow="false" :defaultValue="themes[0].value"/>
     </VHint>
 
     <VHint text="Изменить язык">
@@ -13,12 +15,10 @@
         :showArrow="false"
       />
     </VHint>
-  </div>
+  </header>
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref, toRefs } from "vue";
-
 import VHint from "@/components/UI/VHint/VHint.vue";
 import VSelect from "@/components/UI/VSelect/VSelect.vue";
 
@@ -57,5 +57,9 @@ const lang = [
     align-items: center;
     justify-content: flex-end;
     gap: 12px;
+    padding: 16px 0;
+  }
+  .link {
+    font-size: 14px;
   }
 </style>

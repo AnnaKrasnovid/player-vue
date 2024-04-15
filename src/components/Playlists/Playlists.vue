@@ -36,14 +36,13 @@ import CardPlaylist from "@/components/CardPlaylist/CardPlaylist.vue";
 
 import { usePlaylists } from "@/store/playlists";
 
+const route = useRoute()
 const { playlists } = usePlaylists()
 
-const route = useRoute()
-
-console.log(route.params.id)
-watch(() => route.params.id, (newId, oldId) => {
-  console.log(newId, oldId)
-})
+// console.log(route.params.id)
+// watch(() => route.params.id, (newId, oldId) => {
+//   console.log(newId, oldId)
+// })
 
 </script>
 
