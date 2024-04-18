@@ -1,11 +1,11 @@
 <template>
   <VGrid>
     <template #header>
-      <VHint text="Добавить плейлист">
-        <VButton>
+      <!-- <VHint text="Добавить плейлист"> -->
+        <RouterLink :to="'/playlists/add'">
           <VIconAdd />
-        </VButton>
-      </VHint>
+        </RouterLink>
+      <!-- </VHint> -->
     </template>
 
     <template #body>
@@ -25,32 +25,17 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from "vue";
-import { useRoute } from 'vue-router';
-
 import VGrid from "../UI/VGrid/VGrid.vue";
-import VButton from "@/components/UI/VButton/VButton.vue";
 import VIconAdd from "@/components/UI/VIcons/VIconAdd.vue";
 import VHint from "@/components/UI/VHint/VHint.vue";
 import CardPlaylist from "@/components/CardPlaylist/CardPlaylist.vue";
 
 import { usePlaylists } from "@/store/playlists";
 
-const route = useRoute()
 const { playlists } = usePlaylists()
-
-// console.log(route.params.id)
-// watch(() => route.params.id, (newId, oldId) => {
-//   console.log(newId, oldId)
-// })
 
 </script>
 
 <style lang="scss">
-
-.playlists {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
+@import "./Playlists.scss";
 </style>

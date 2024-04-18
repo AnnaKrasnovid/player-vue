@@ -6,13 +6,13 @@
         :elements="1" 
         :index="index"        
         >
-            <DownloadFile :file="file"/>
+            <DownloadFile :file="file" @delete-file="emits('delete-file', $event)"/>
         </Animation>        
     </ul>
 </template>
 
 <script setup lang="ts">
-import { defineProps, toRefs } from "vue";
+import { defineProps, toRefs, defineEmits } from "vue";
 
 import Animation from "@/components/UI/Animation/Animation.vue";
 import  DownloadFile from "@/components/DownloadFile/DownloadFile.vue";
@@ -22,14 +22,11 @@ type Props = {
 };
 
 const props = defineProps<Props>();
+const emits = defineEmits(["delete-file"]);
 const { files } = toRefs(props);
+
 </script>
 
 <style lang="scss">
-    .download-list {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-    }
+   @import "./DownloadList.scss";
 </style>

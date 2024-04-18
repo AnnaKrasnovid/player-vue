@@ -1,23 +1,29 @@
 <template>
-  <Download title="Добавить песни" type="songs" @add="addSongs"/>
+  <Download     
+    type="songs" 
+    @add="addSongs"
+  >
+    <DownloadHeader 
+      title="Добавить песни в альбом :" 
+      type="songs" 
+    />
+  </Download>
 </template>
 
 <script setup lang="ts">
-import { defineProps, toRefs, ref } from "vue";
 import { useRoute } from 'vue-router';
 
 import Download from "@/components/Download/Download.vue";
+import DownloadHeader from "@/components/DownloadHeader/DownloadHeader.vue";
 
 import { usePlaylists } from "@/store/playlists"
+import { NewPlaylistInt } from '@/types/types';
 
 const route = useRoute()
 const playlistsStore = usePlaylists();
 
-console.log(route.query.playlist)
-
-function addSongs(files) {
-  // console.log(files)
-  playlistsStore.addNewSongs(route.query.playlist, [files])
+function addSongs(files: NewPlaylistInt) {
+  playlistsStore.addNewSongs(route.query.playlistId, files)
 }
 
 </script>

@@ -2,13 +2,15 @@
   <div class="file">
     <div class="file__container">
       <div class="file__box">
-        <p class="file__author">Author</p>
-        <h3 class="file__title">Title</h3>
+        <p class="file__author">{{ file.author }}</p>
+        <h3 class="file__title">{{ file.title }}</h3>
       </div>
       <div class="file__size">
-        <!--TODO: Id for delete -->
-        <VButton class="button-overlay-card" @click="emits('delete-file', file)">
-          <IconDelete  />
+        <VButton
+          class="button-overlay-card"
+          @click="emits('delete-file', file.id)"
+        >
+          <IconDelete />
         </VButton>
       </div>
     </div>
@@ -21,38 +23,20 @@ import { defineProps, toRefs, defineEmits } from "vue";
 import VButton from "@/components/UI/VButton/VButton.vue";
 import IconDelete from "@/components/UI/VIcons/IconDelete.vue";
 
+import { SongInt } from "@/types/types";
+
 type Props = {
-  file?: Array<any>;
+  file?: Array<SongInt>;
 };
 
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
 const { file } = toRefs(props);
 const emits = defineEmits(["delete-file"]);
+
+console.log(file);
 </script>
 
-<style lang="scss">
-.file {
-    padding: 16px;
-         box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.9);
-         border: 1px solid rgba(255, 255, 255, 0.05);
-         border-radius: 6px;
-
-         &__container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 16px;
-            width: 100%;
-         }
-        
-         &__author{
-            font-size: 16px;
-         }
-         &__title {
-            font-size: 16px;
-         }
-}
-
-
+<style scoped lang="scss">
+@import "./DownloadFile.scss";
 </style>

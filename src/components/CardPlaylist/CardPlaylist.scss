@@ -3,14 +3,10 @@
     border: 1px solid #fff;
     border-radius: 12px;
 
-    //   height: 250px;
     &__img {
         max-width: 300px;
-        // width: 100%;
-        // max-height: 150px;
         overflow: hidden;
         border-radius: 16px;
-        // min-height: 100%;
         height: auto;
         border: 1px solid #fff;
         border-radius: 12px;
@@ -18,7 +14,6 @@
         img {
             width: 100%;
             object-fit: cover;
-            // border-radius: 16px;
             height: 100%;
             object-position: 50% 50%;
         }

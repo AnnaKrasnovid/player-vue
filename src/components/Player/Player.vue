@@ -61,6 +61,7 @@ const getSongDuration = () => {
     getDuration(refAudio.value.duration);
   }
 };
+
 const updateProgress = () => {
   updateCurrentTime(refAudio.value.currentTime);
 };
@@ -84,6 +85,7 @@ watch(() => [indexSong.value, song.isPlaySong], () => {
 onMounted(() => { 
   // playlistsStore.addDefaultActivePlaylist()
   switchSong(playlistsStore.activePlaylists?.songs[0]);
+  console.log(playlistsStore.activePlaylists?.songs[0])
 });
 </script>
 

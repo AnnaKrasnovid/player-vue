@@ -16,15 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, toRefs, ref, defineEmits } from "vue";
+import { ref, defineEmits } from "vue";
 
-// type Props = {
-//   isOpen: boolean;
-//   refElement?: any;
-// };
-
-// const props = defineProps<Props>();
-// const { isOpen, refElement } = toRefs(props);
 const emit = defineEmits(["add-files"]);
 
 const dragEnter = ref<boolean>(false);

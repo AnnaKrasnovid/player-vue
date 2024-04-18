@@ -1,12 +1,14 @@
 import { defineStore } from "pinia";
 
 import { songs } from "@/assets/appData/songs";
-import { Playlist } from "@/types/types";
+import { Playlist, SongInt } from "@/types/types";
+//@ts-ignore
+import Img from "@/assets/images/images/bg.png";
 
 const defaultPlaylists = {  
   id: '1',      
   title: 'По умолчанию',
-  cover: '',
+  cover: Img,
   songs: [...songs, ...songs],
 }
 const defaultPlaylists2 = {  
@@ -30,6 +32,8 @@ export const usePlaylists = defineStore('usePlaylists', {
         cover: data?.cover ? data.cover : '',
         songs: data.songs,
       });
+
+      console.log(this.playlists)
     },  
     deletePlaylist(id: string) {
       this.playlists = this.playlists.filter(i => i.id !== id)
@@ -44,14 +48,15 @@ export const usePlaylists = defineStore('usePlaylists', {
     //   this.activePlaylists = this.playlists[0]
     // },
 
-    addNewSongs(playlistId:string, songs:any) {
-      // @ts-ignore
+    addNewSongs(playlistId: string, songs: Array<SongInt>) { 
+      console.log(playlistId, songs)  
       this.playlists.map((i)=> {
-        console.log(i.id, playlistId)
+        // console.log(i.id, playlistId)
         if(i.id === playlistId) {           
           i.songs.push(...songs)          
         }      
       })
+      console.log('this.playlists', this.playlists)
     },
   },
 })

@@ -50,16 +50,5 @@ const lang = [
 </script>
 
 <style scoped lang="scss">
-  @import './TheHeader.scss';
-  .header {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 12px;
-    padding: 16px 0;
-  }
-  .link {
-    font-size: 14px;
-  }
+  @import './TheHeader.scss'; 
 </style>
