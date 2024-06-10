@@ -1,8 +1,10 @@
 $color-primary: #7D2253;
 $color-secondary: #E3E3E3;
+$color-error: #EE3465;
 
 $color-white: #FFFFFF;
 $color-black: #000000;
+$border: 1px solid rgba(255, 255, 255, 0.05);
 // $color-gray:#FFFDFD;
 $color-middle-gray: #C5C6C5;
 $box-shadow: 7px 7px 16px rgba(0, 0, 0, 0.5);
@@ -12,3 +14,28 @@ $border-radius: 24px;
 
 $max-height-container: 715px;
 $transition: all 0.3s linear;
+// $background-img: url(../images/images/bg.png);
+
+:root {
+    --primary: #{$color-primary};
+    --secondary: #{$color-secondary};
+    --color-text: #{$color-white};
+    --border: #{$border};
+    //  --backgraund: url();
+}
+
+.blue {
+
+    --primary: #81BECB;
+    --secondary: white;
+    // --border:  1px solid #81BECB;
+    // --backgraund: url(../images/images/bg.png);
+}
+
+.green {
+
+    --primary: #43FFD2;
+    --color-text: #{$color-black};
+    // --border: 1px solid #43FFD2;
+    // --backgraund: url(../images/images/bg-green.png);
+}

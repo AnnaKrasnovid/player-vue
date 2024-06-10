@@ -2,6 +2,7 @@
     <ul v-if="files?.length" class="download-list scroll">
         <Animation 
         v-for="(file, index) in files"
+        tag="li"
         :key="index"
         :elements="1" 
         :index="index"        
@@ -23,6 +24,7 @@ type Props = {
 
 const props = defineProps<Props>();
 const emits = defineEmits(["delete-file"]);
+
 const { files } = toRefs(props);
 
 </script>

@@ -10,7 +10,6 @@
     <ImagePlayer :isPlaySong="song.isPlaySong" />
     <div class="player__box">
       <PlayerHeading />
-      <!--  <Like type='like' callback={() => deleteFromFavorites(activeSong.id)} />  -->
     </div>
     <Tools
       @prevSong="prevSong"
@@ -18,15 +17,17 @@
       @pauseSong="pauseSong"
       @playSong="playSong"
       @changeVolume="changeVolume"
+      @playRandomSong="toggleRandom"
       :isPlaySong="song.isPlaySong"
       :volume="volume"
+      :isRandom="isRandom"
     />
     <PlayerTrack @changeTime="changeTime" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, watch } from "vue";
+import { onMounted, watch, ref } from "vue";
 
 import Tools from "@/components/Tools/Tools.vue";
 import ImagePlayer from "@/components/PlayerImage/PlayerImage.vue";
@@ -35,26 +36,47 @@ import PlayerHeading from "@/components/PlayerHeading/PlayerHeading.vue";
 
 import { useAudio } from "@/composables/useAudio";
 import { useActiveSong } from "@/store/activeSong";
-// import { useSongs } from "@/store/songs";
 import { usePlaylists } from "@/store/playlists";
+import { getRandomNumber } from "@/helpers/getRandomNumber/getRandomNumber";
 
-
-const { switchSong, getDuration, updateCurrentTime, song } = useActiveSong();
-// const { songs } = useSongs();
-const playlistsStore = usePlaylists();
-// const {playlists, activePlaylists, } = usePlaylists();
 const {
   refAudio,
-  indexSong,
   volume,
   playSong,
   pauseSong,
-  prevSong,
-  nextSong,
   changeTime,
   changeVolume,
-} = useAudio(playlistsStore.activePlaylists.songs);
+} = useAudio();
+const { switchSong, getDuration, updateCurrentTime, song } = useActiveSong();
+const playlistsStore = usePlaylists();
 
+const indexSong = ref<number>(0);
+const isRandom = ref<boolean>(false);
+
+const prevSong = () => {
+  if(isRandom.value) {
+    playRandomSong();
+    return;
+  }
+
+  if (indexSong.value === 0) {
+    indexSong.value = playlistsStore.activePlaylists.songs.length - 1;
+  } else {
+    indexSong.value = indexSong.value - 1;
+  }
+}
+
+const nextSong = () => {  
+  if(isRandom.value) {
+    playRandomSong();
+    return;
+  }  
+  if (indexSong.value === playlistsStore.activePlaylists.songs.length - 1) {
+    indexSong.value = 0;
+  } else {
+    indexSong.value = indexSong.value + 1;
+  }
+}
 
 const getSongDuration = () => {
   if (refAudio.value) {
@@ -70,23 +92,25 @@ const changeActiveSong = () => {
   switchSong(playlistsStore.activePlaylists.songs[indexSong.value]);
 };
 
+const toggleRandom =()=> {
+  isRandom.value = !isRandom.value
+}
+
+const playRandomSong =()=> { 
+  indexSong.value = getRandomNumber(playlistsStore.activePlaylists.songs.length);  
+}
+
 watch(() => indexSong.value, () => {
   if (song.activeSong) {
     changeActiveSong();
   }
 });
 
-watch(() => [indexSong.value, song.isPlaySong], () => {
-  if (song.isPlaySong) {
-    playSong();
-  }
-});
-
 onMounted(() => { 
   // playlistsStore.addDefaultActivePlaylist()
   switchSong(playlistsStore.activePlaylists?.songs[0]);
-  console.log(playlistsStore.activePlaylists?.songs[0])
 });
+
 </script>
 
 <style scoped lang="scss">

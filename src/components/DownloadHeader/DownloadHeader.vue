@@ -23,7 +23,7 @@
       <div v-if="type === 'playlist'" class="download__inputs">
         <VInput
           @change-input="emits('add-title', $event)"
-          placeholder="Введите название альбома"
+          :placeholder="t('newPlaylist.placeholder')"
         />
       </div>
     </div>
@@ -31,15 +31,16 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, toRefs, ref, defineEmits, onMounted, computed, watch } from "vue";
-import { useRoute } from 'vue-router';
+import { defineProps, toRefs, ref, defineEmits, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import { useI18n } from "vue-i18n";
 
 import VInputDownload from "@/components/UI/VInputDownload/VInputDownload.vue";
 import VInput from "@/components/UI/VInput/VInput.vue";
 import VIconAdd from "../UI/VIcons/VIconAdd.vue";
 import Img from "@/assets/images/images/cover.png";
 
-import { usePlaylists } from "@/store/playlists"
+import { usePlaylists } from "@/store/playlists";
 
 interface Props  {
   title: string;
@@ -48,8 +49,10 @@ interface Props  {
 
 const emits = defineEmits(["add-title", "add-files"]);
 const props = defineProps<Props>();
+
 const { title, type } = toRefs(props);
 
+const { t } = useI18n()
 const route = useRoute()
 const { playlists } = usePlaylists();
 
@@ -64,7 +67,7 @@ const addCover = (cover) => {
 function getCover() {
   if(type.value === 'songs'){
     playlist.value = playlists.filter(item=> item.id === route.query.playlistId)[0]
-    coverPlaylist.value = playlist.value.cover  
+    coverPlaylist.value = playlist.value?.cover  
   }  
   if(type === 'playlist') {
     coverPlaylist.value = Img

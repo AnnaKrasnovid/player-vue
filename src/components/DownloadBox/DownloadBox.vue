@@ -8,7 +8,7 @@
   >
     <div class="download-box__content">
       <p class="download-box__subtitle">
-        Выберите файл или перетащите его сюда
+        {{ t('download.text')}}
       </p>
       <slot />
     </div>
@@ -17,9 +17,11 @@
 
 <script setup lang="ts">
 import { ref, defineEmits } from "vue";
+import { useI18n } from "vue-i18n";
 
 const emit = defineEmits(["add-files"]);
 
+const { t } = useI18n()
 const dragEnter = ref<boolean>(false);
 
 function overrideEventDefaults(event: any) {

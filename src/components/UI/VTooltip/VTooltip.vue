@@ -22,6 +22,7 @@ type Props = {
 
 const props = defineProps<Props>();
 const { isOpen, refElement } = toRefs(props);
+
 </script>
 
 <style scoped lang="scss">

@@ -24,7 +24,6 @@ export const useActiveSong = defineStore('songStore', {
     },
     changePlaybackSong(value:any) {
       this.song.isPlaySong = value;
-    //   console.log(action.payload.isPlaySong)
     },
   },
 })

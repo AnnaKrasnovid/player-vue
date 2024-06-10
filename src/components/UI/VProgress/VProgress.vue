@@ -45,6 +45,7 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits(["callback"]);
 
 const { allProgress, currentProgress } = toRefs(props);
+
 const {
   handlerMouseDown,
   handlerMouseleave,
@@ -82,7 +83,8 @@ watch(
     getWidth();
   },
   { immediate: true },
-);
+)
+
 </script>
 
 <style scoped lang="scss">

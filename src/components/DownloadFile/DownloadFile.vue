@@ -30,11 +30,10 @@ type Props = {
 };
 
 const props = defineProps<Props>();
-
-const { file } = toRefs(props);
 const emits = defineEmits(["delete-file"]);
 
-console.log(file);
+const { file } = toRefs(props);
+
 </script>
 
 <style scoped lang="scss">

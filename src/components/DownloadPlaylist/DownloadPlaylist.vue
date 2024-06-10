@@ -1,11 +1,10 @@
 <template>
   <Download 
-    title="Добавить плейлист" 
     type="playlist" 
     @add="addPlaylist"
   >
     <DownloadHeader 
-      title="Добавить новый плейлист"
+      :title="t('newPlaylist.title')"
       type="playlist" 
       @add-files="addCover"
       @add-title="addTitle" 
@@ -15,11 +14,14 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
+
 import Download from "@/components/Download/Download.vue";
 import DownloadHeader from "@/components/DownloadHeader/DownloadHeader.vue";
 
-import { usePlaylists } from '@/store/playlists';
+import { usePlaylists } from "@/store/playlists";
 
+const { t } = useI18n()
 const { addNewPlaylists } = usePlaylists()
 
 const titlePlaylist = ref<string>("");

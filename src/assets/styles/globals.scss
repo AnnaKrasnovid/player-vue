@@ -42,6 +42,10 @@ a {
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
+  
+}
+
+.root {
     backdrop-filter: blur(30px);
     background-color: $color-dark;
     color: $color-white;
@@ -49,9 +53,17 @@ a {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    
+}
+.root.green {
+    background-image:none;
 }
 
-.root {
+.root.blue {
+    background-image:none;
+}
+
+.main-page {
     margin: 0 auto;
     background: rgba(0, 0, 0, 0.10);
     backdrop-filter: blur(10px);

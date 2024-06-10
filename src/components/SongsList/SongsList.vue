@@ -3,19 +3,21 @@
     <Animation
       v-for="(item, index) in list"
       :key="item.id"
-      @callback="()=>emits('change-song', item.id)"
       :elements="list.length"
       :index="index"
-      animationName="animation-position"
       :delay="0.2"
-    >    
-      <Song :item="item" />     
+      tag="li"
+      animationName="animation-position"
+      @callback="changeSong(item.id)"
+    >
+      <Song :item="item" />
     </Animation>
   </ul>
 </template>
 
 <script setup lang="ts">
 import { defineEmits, defineProps, toRefs } from "vue";
+
 import Song from "@/components/Song/Song.vue";
 import Animation from "@/components/UI/Animation/Animation.vue";
 
@@ -28,6 +30,10 @@ const props = defineProps<Props>();
 const { list, isActive } = toRefs(props);
 
 const emits = defineEmits(["change-song"]);
+
+function changeSong(id) {
+  emits("change-song", id);
+}
 </script>
 
 <style lang="scss">

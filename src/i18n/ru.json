@@ -1,0 +1,30 @@
+{
+    "title": "ru",
+    "playlists": "Плейлисты",
+    "hintTheme": "Изменить тему",
+    "hintLanguage": "Изменить язык",
+    "hintAddSongs": "Добавить песни",
+    "hintAddPlaylists": "Добавить плейлист",
+    "theme": {
+        "pink": "Pозовая",
+        "blue": "Голубая",
+        "green": "Зеленая"
+    },
+    "language": {
+        "en": "en",
+        "ru": "ru"
+    },
+    "newPlaylist": {
+        "title": "Добавить новый плейлист",
+        "placeholder": "Введите название альбома"
+    },
+    "newSongs": {
+        "title": "Добавить песни в альбом:"
+    },
+    "download": {
+        "text": "Выберите файл или перетащите его сюда",
+        "button": "Выбрать файл"
+    },
+    "buttonAdd": "Добавить",
+    "listen": "Слушать"
+}

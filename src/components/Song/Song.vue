@@ -29,6 +29,7 @@ const props = defineProps<Props>();
 const { item } = toRefs(props);
 
 const { song } = useActiveSong();
+
 </script>
 
 <style lang="scss">

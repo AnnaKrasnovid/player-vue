@@ -16,6 +16,7 @@ type Props = {
 
 const props = defineProps<Props>();
 const { text } = toRefs(props);
+
 </script>
 
 <style scoped lang="scss">

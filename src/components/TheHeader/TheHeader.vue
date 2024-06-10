@@ -1,54 +1,106 @@
 <template>
   <header class="header">
     <RouterLink to="/playlists" class="link"> 
-      Плейлисты 
+      {{ t('playlists') }} 
     </RouterLink>
 
-    <VHint text="Сменить тему">
-      <VSelect :options="themes" :showArrow="false" :defaultValue="themes[0].value"/>
+    <VHint :text="t('hintTheme')">
+      <VSelect 
+      :options="themes" 
+      :showArrow="false" 
+      :defaultValue="switchTheme.optionName "
+      @change-option="handleChangeOptions('theme', $event)"
+    />
     </VHint>
 
-    <VHint text="Изменить язык">
+    <VHint :text="t('hintLanguage')">
       <VSelect
         :options="lang"
-        :defaultValue="lang[0].value"
+        :defaultValue="switchLang.optionName"
         :showArrow="false"
+        @change-option="handleChangeOptions('lang', $event)"
       />
     </VHint>
   </header>
 </template>
 
 <script setup lang="ts">
+import { computed, defineProps, toRefs } from "vue";
+import { useI18n } from "vue-i18n";
+
 import VHint from "@/components/UI/VHint/VHint.vue";
 import VSelect from "@/components/UI/VSelect/VSelect.vue";
+import { useSwitchSettings } from "@/composables/useSwitchSettings"; 
 
-const themes = [
+type Props = {
+  refRoot: any;
+};
+
+const props = defineProps<Props>();
+const { refRoot } = toRefs(props);
+
+const { t, locale } = useI18n()
+
+const switchTheme = useSwitchSettings(refRoot, 'theme');
+const switchLang = useSwitchSettings(refRoot, 'lang');
+
+const themes = computed(() => [
   {
     id: "1",
-    title: "Розовая",
-    value: "Pink",
+    title: t('theme.pink'),
+    value: "pink",
   },
   {
     id: "2",
-    title: "Голубая",
-    value: "Blue",
+    title: t('theme.blue'),
+    value: "blue",
   },
-];
+  {
+    id: "3",
+    title: t('theme.green'),
+    value: "green",
+  },
+],
 
-const lang = [
+) ;
+const lang = computed(() =>[
   {
     id: "1",
-    title: "ru",
+    title: t('language.ru'),
     value: "ru",
   },
   {
     id: "2",
-    title: "en",
+    title: t('language.en'),
     value: "en",
   },
-];
+])
+
+const handleChangeOptions =(setting, option)=> {
+  if(setting === 'theme') {
+    switchTheme.changeSetting(option);
+  } 
+  if (setting === 'lang') {
+    switchLang.changeSetting(option);
+    locale.value = option;
+  }
+}
+
 </script>
 
 <style scoped lang="scss">
   @import './TheHeader.scss'; 
+
+  .link {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  background: rgba(0, 0, 0, .25);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 6px 16px;
+    
+    border-radius: 6px;
+}
 </style>

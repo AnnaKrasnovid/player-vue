@@ -2,7 +2,8 @@
   <div class="tools">
     <VButtonPlayer 
       icon="arrows" 
-      @callback="emit('prevSong')" 
+      :isActive="isRandom"
+      @callback="emit('playRandomSong')" 
     />
     <div class="tools__switches">
       <VButtonPlayer 
@@ -26,7 +27,7 @@
       :isOpen="isActive" 
       :refElement="refElement"
     >
-      <PlayerSound @callback="emit('changeVolume', $event)" />
+      <PlayerSound :volume="volume" @callback="emit('changeVolume', $event)" />
     </VTooltip>
   </div>
 </template>
@@ -36,7 +37,6 @@ import {
   defineProps,
   defineEmits,
   withDefaults,
-  ref,
   toRefs,
   watch,
 } from "vue";
@@ -50,6 +50,7 @@ import { useToggleVisibility } from "@/composables/useToggleVisibility";
 interface Props {
   isPlaySong: boolean;
   volume?: number;
+  isRandom?: boolean
 }
 
 const emit = defineEmits([
@@ -58,23 +59,26 @@ const emit = defineEmits([
   "pauseSong",
   "playSong",
   "changeVolume",
+  'playRandomSong',
 ]);
 
 const props = withDefaults(defineProps<Props>(), {
   isPlaySong: false,
-  volume: 0.5,
+  volume: 0.1,
+  isRandom: false,
 });
-const { isPlaySong, volume } = toRefs(props);
 
-const { refElement, isActive, openModal, closeModal } = useToggleVisibility(false);
+const { isPlaySong, volume, isRandom } = toRefs(props);
+const { refElement, isActive,  openModal, closeModal } = useToggleVisibility(false);
 
 watch(
   () => volume.value,
   () => {
-    const timer = setTimeout(() => closeModal(), 500);
+    const timer = setTimeout(() => closeModal(), 1000);
     return () => clearTimeout(timer);
   },
 );
+
 </script>
 
 <style scoped lang="scss">

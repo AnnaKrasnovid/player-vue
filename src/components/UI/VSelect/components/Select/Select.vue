@@ -19,13 +19,13 @@ type Props = {
   showArrow?: boolean
 };
 
-// const props = defineProps<Props>();
 const props = withDefaults(defineProps<Props>(), { 
   showArrow: true,
 })
 const { isActive, selectedItem } = toRefs(props);
 
 const emits = defineEmits(['open-modal']);
+
 </script>
 
 <style scoped lang="scss">

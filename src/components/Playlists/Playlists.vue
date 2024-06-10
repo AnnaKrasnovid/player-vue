@@ -1,41 +1,66 @@
 <template>
   <VGrid>
-    <template #header>
-      <!-- <VHint text="Добавить плейлист"> -->
-        <RouterLink :to="'/playlists/add'">
+    <template #header>      
+      <VHint :text="t('hintAddPlaylists')">
+        <RouterLink to="/playlists/add" class="link-add">
           <VIconAdd />
         </RouterLink>
-      <!-- </VHint> -->
+      </VHint>
     </template>
 
     <template #body>
-      <!-- плейлист -->
+      <!-- плейлистЫ -->
       <ul class="playlists">
-        <li 
-          v-for="playlist  in playlists"  
-          :key="playlist.id" class="playlists__item"
+        <li
+          v-for="playlist in playlists"
+          :key="playlist.id"
+          class="playlists__item"
         >
-          <RouterLink :to="`playlist/${playlist.id}`">
-            <CardPlaylist :playlist="playlist" />
-          </RouterLink>
-        </li>       
+            <CardPlaylist :playlist="playlist" @delete="deleteList"/>         
+        </li>
       </ul>
     </template>
   </VGrid>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from "vue-i18n";
+
 import VGrid from "../UI/VGrid/VGrid.vue";
 import VIconAdd from "@/components/UI/VIcons/VIconAdd.vue";
 import VHint from "@/components/UI/VHint/VHint.vue";
 import CardPlaylist from "@/components/CardPlaylist/CardPlaylist.vue";
 
 import { usePlaylists } from "@/store/playlists";
+import { ref, watch } from "vue";
 
-const { playlists } = usePlaylists()
+const { t } = useI18n();
+const { playlists, deletePlaylist } = usePlaylists();
+const idPlaylist = ref<number | string | null>(null);
+
+const deleteList = (id) => {
+  idPlaylist.value = id;  
+}
+
+watch(()=> idPlaylist.value, ()=> {
+  deletePlaylist(idPlaylist.value);
+}, { deep: true })
 
 </script>
 
 <style lang="scss">
 @import "./Playlists.scss";
+
+.link-add {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  background: rgba(0, 0, 0, .25);
+    
+    padding: 6px;
+    border: var(--border);
+    border-radius: 6px;
+}
 </style>

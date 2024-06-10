@@ -5,7 +5,8 @@
       'button',
       {
         [`button_size_${size}`]: size,
-        [className]: className
+        [`button_color_${color}`]: color,
+        [className]: className,
       },
     ]"
     :disabled="disabled"
@@ -21,15 +22,17 @@ import { toRefs, defineProps, defineEmits, withDefaults } from "vue";
 type Props = {
   type?: "button" | "submit";
   size?: "small" | "middle" | "large";
-  className?: string, 
-  disabled: boolean,
+  className?: string;
+  disabled: boolean;
+  color?: string;
 };
 
 const props = withDefaults(defineProps<Props>(), {
   type: "button",
   size: "middle",
-  className: '',
+  className: "",
   disabled: false,
+  color: '',
 });
 const emit = defineEmits(["callback"]);
 

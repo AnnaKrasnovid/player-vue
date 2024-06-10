@@ -33,8 +33,24 @@ export const songs: Array<any> = [
     title: 'Elevate',
     cover: '',
   },
+  // {
+  //   id: 4,
+  //   audio: AudioFour,
+  //   author: 'Rammstein',
+  //   title: 'Du Hast',
+  //   cover: '',
+  // },
+]
+export const songs2: Array<any> = [  
   {
-    id: 4,
+    id: 5,
+    audio: AudioThree,
+    author: 'Benjamin Tissot',
+    title: 'Elevate',
+    cover: '',
+  },
+  {
+    id: 6,
     audio: AudioFour,
     author: 'Rammstein',
     title: 'Du Hast',

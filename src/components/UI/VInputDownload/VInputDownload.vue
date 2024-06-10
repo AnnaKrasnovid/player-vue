@@ -1,10 +1,7 @@
 <template>
-  <label :htmlFor="name" :class="[
-        'label',
-        {[className]: className},
-      ]">
-    <slot> 
-      Выбрать файл
+  <label :htmlFor="name" :class="['label', { [className]: className }]">
+    <slot>
+      {{ t("download.button") }}
     </slot>
     <input
       type="file"
@@ -18,7 +15,8 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, withDefaults, defineProps, toRefs, computed } from "vue";
+import { defineEmits, withDefaults, defineProps, toRefs } from "vue";
+import { useI18n } from "vue-i18n";
 
 type Props = {
   format?: "audio" | "image";
@@ -27,12 +25,14 @@ type Props = {
   className: string;
 };
 
+const emit = defineEmits(["add-files"]);
 const props = withDefaults(defineProps<Props>(), {
   format: "audio",
   label: "",
 });
 const { format, label } = toRefs(props);
-const emit = defineEmits(["add-files"]);
+
+const { t } = useI18n();
 
 function handleChange(e) {
   const filesObj = Object.values(e.target.files);

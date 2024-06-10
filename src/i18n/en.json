@@ -1,0 +1,30 @@
+{
+    "title": "en",
+    "playlists": "Playlists",
+    "hintTheme": "Change the theme",
+    "hintLanguage": "Change the language",
+    "hintAddSongs": "Add Songs",
+    "hintAddPlaylists": "Add Playlists",
+    "theme": {
+        "pink": "pink",
+        "blue": "blue",
+        "green": "green"
+    },
+    "language": {
+        "en": "en",
+        "ru": "ru"
+    },
+    "newPlaylist": {
+        "title": "Add a new playlist",
+        "placeholder": "Enter the name of the album"
+    },
+    "newSongs": {
+        "title": "Add songs to an album:"
+    },
+    "download": {
+        "text": "Select a file or drag it here",
+        "button": "Select a file"
+    },
+    "buttonAdd": "Add",
+    "listen": "To listen"
+}

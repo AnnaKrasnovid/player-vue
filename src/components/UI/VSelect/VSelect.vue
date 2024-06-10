@@ -4,7 +4,10 @@
       {{ label }}
     </p>
 
-    <div :class="['dropdown__select', { 'dropdown__select_active': isActive }]">
+    <div :class="[
+      'dropdown__select',
+      { 'dropdown__select_active': isActive }
+     ]">
       <Select
         :isActive="isActive"
         @openModal="openModal"
@@ -12,8 +15,11 @@
         :showArrow="showArrow"
       />
       <div
-        :class="['dropdown__options', { 'dropdown__options_active': isActive }]"
         ref="refElement"
+        :class="[
+        'dropdown__options',
+         { 'dropdown__options_active': isActive }
+        ]"        
       >
         <!-- <ScrollBar> -->
         <Options
@@ -28,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, toRefs, ref, withDefaults, onMounted } from "vue";
+import { defineProps, defineEmits, toRefs, ref, withDefaults, onMounted, watch } from "vue";
 import Options from "./components/Options/Options.vue";
 import Select from "./components/Select/Select.vue";
 import { useToggleVisibility } from "@/composables/useToggleVisibility";
@@ -47,7 +53,7 @@ type Props = {
   showArrow?: boolean
 };
 
-const emits = defineEmits(['callback'])
+const emits = defineEmits(['changeOption'])
 const props = withDefaults(defineProps<Props>(), {
   label: '',
   placeholder: '',
@@ -65,19 +71,21 @@ const choiceOption = (id: string | number) => {
 
   if (item) {
     selectedItem.value = item.title;
-    emits('callback', item.value);
+    emits('changeOption', item.value);
   }
 }
 
 const getTitle = () => {
   const defaultTitle = options.value.find((item) => item.value === defaultValue.value);
-  const value =  defaultTitle ? options.value[0].title  : '';
+
+  const value =  defaultTitle ?  defaultTitle.title : options.value[0].title;
   selectedItem.value = value;
 }
 
-onMounted(()=> {
+watch(()=> [defaultValue.value, options.value], ()=> {
   getTitle();
-})
+}, { immediate: true })
+
 </script>
 
 <style scoped lang="scss">

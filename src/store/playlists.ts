@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-import { songs } from "@/assets/appData/songs";
+import { songs, songs2 } from "@/assets/appData/songs";
 import { Playlist, SongInt } from "@/types/types";
 //@ts-ignore
 import Img from "@/assets/images/images/bg.png";
@@ -9,13 +9,13 @@ const defaultPlaylists = {
   id: '1',      
   title: 'По умолчанию',
   cover: Img,
-  songs: [...songs, ...songs],
+  songs: [...songs],
 }
 const defaultPlaylists2 = {  
   id: '555',      
   title: 'По умолчанию 222',
   cover: '',
-  songs: [...songs],
+  songs: [...songs2],
 }
 
 export const usePlaylists = defineStore('usePlaylists', {
@@ -26,22 +26,23 @@ export const usePlaylists = defineStore('usePlaylists', {
   getters: {},
   actions: {
     addNewPlaylists(data: Playlist) {
-      this.playlists.push({    
+      const newPlaylist = {    
         id: String(Date.now()),   
         title: data.title,
         cover: data?.cover ? data.cover : '',
         songs: data.songs,
-      });
+      }
 
-      console.log(this.playlists)
+      this.playlists.push(newPlaylist);
     },  
     deletePlaylist(id: string) {
       this.playlists = this.playlists.filter(i => i.id !== id)
+      console.log(this.playlists)
     },
     changeActivePlaylist(id: string) {
       // @ts-ignore
       this.activePlaylists = this.playlists.filter(i => i.id === id)[0]
-      console.log(this.activePlaylists)
+      console.log('changeActivePlaylist', this.activePlaylists)
     },
     // addDefaultActivePlaylist() {     
     //   //@ts-ignore
@@ -49,14 +50,12 @@ export const usePlaylists = defineStore('usePlaylists', {
     // },
 
     addNewSongs(playlistId: string, songs: Array<SongInt>) { 
-      console.log(playlistId, songs)  
       this.playlists.map((i)=> {
-        // console.log(i.id, playlistId)
         if(i.id === playlistId) {           
           i.songs.push(...songs)          
         }      
       })
-      console.log('this.playlists', this.playlists)
+      // console.log('this.playlists', this.playlists)
     },
   },
 })

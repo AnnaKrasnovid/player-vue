@@ -1,5 +1,7 @@
 <template>
-  <p class="error">{{ error }}</p>
+  <p class="error">
+    {{ error }}
+  </p>
 </template>
 
 <script setup lang="ts">
@@ -11,6 +13,7 @@ type Props = {
 
 const props = defineProps<Props>();
 const { error } = toRefs(props);
+
 </script>
 
 <style scoped lang="scss">

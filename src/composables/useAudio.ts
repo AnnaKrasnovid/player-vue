@@ -1,16 +1,11 @@
-import { watch, ref } from 'vue';
+import { watch, ref, nextTick } from 'vue';
 
 import { useActiveSong } from '@/store/activeSong'
-
 export interface AudioInt {
   refAudio: any,
-  indexSong: number,
-  // isPlaySong: boolean,
   volume:number,
   playSong: () => void,
   pauseSong: () => void,
-  prevSong: () => void,
-  nextSong: () => void,
   changeVolume: (seconds: number) => void,
   changeTime: (volume: number) => void,
 }
@@ -23,29 +18,11 @@ export interface SongInt {
   cover?: string
 }
 
-export function useAudio(songs: Array<SongInt>) {
-  const { changePlaybackSong } = useActiveSong()
-  
+export function useAudio() {
+  const { changePlaybackSong, song } = useActiveSong()
+
   const refAudio = ref<HTMLAudioElement>();
-  const indexSong = ref<number>(0);
   const volume = ref<number>(0.1);
-
-  const prevSong = () => {
-    if (indexSong.value === 0) {
-      indexSong.value = songs.length - 1
-    } else {
-      indexSong.value = indexSong.value - 1
-    }
-  }
-
-  const nextSong = () => {    
-    if (indexSong.value === songs.length - 1) {
-      indexSong.value = 0
-    } else {
-      indexSong.value = indexSong.value +1
-    }    
-    // console.log(indexSong.value)
-  }
 
   const playSong = () => {
     if (refAudio.value) {     
@@ -74,21 +51,28 @@ export function useAudio(songs: Array<SongInt>) {
     }
   }
 
-  watch(refAudio, ()=> {
+  watch(() => refAudio.value, ()=> {
     if (refAudio.value) {
-      volume.value  = 0.1
+      changeVolume(0.1)
     }
   }, { deep:true, immediate: true })
 
+  watch(() => song.activeSong, () => { 
+    // если трек воспроизводится, 
+    // то при переключении трека/или текущий трек закончится,  
+    // начнется воспроизведение
+    nextTick(() => {
+      if (song.isPlaySong && refAudio.value) {
+        playSong() 
+      }   
+    })
+  }, { deep:true });
+
   return {
     refAudio,
-    indexSong,
-    // isPlaySong,
     volume,
     playSong,
     pauseSong,
-    prevSong,
-    nextSong,
     changeTime,
     changeVolume,
   };

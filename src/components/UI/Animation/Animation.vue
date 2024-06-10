@@ -1,5 +1,5 @@
 <template>
-  <li
+  <tag
     :class="{
         'animation-default': !animationName,
         [animationName]: animationName,
@@ -12,27 +12,17 @@
     @click="emits('callback')"
   >
     <slot />
-  </li>
+  </tag>
 
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps, toRefs, withDefaults } from "vue";
+import { computed, defineEmits, defineProps, toRefs, withDefaults } from "vue";
+
 type AnimationTypes = "animation" | "animation-position";
 
-type AnimationOwnProps = {
-  //   as?: E; // тег б по умолчанию div
-  //   children: ReactNode | string, // анимируемый элемент
-  animationName?: AnimationTypes; //класс анимации
-  elements: number; // количество элементов анимации
-  index: number; // индекс элемента
-  stepDelay?: number; //промежуток задержки
-  delay?: number; // задержка перед началом анимации
-  className?: string;
-  isActive?: boolean;
-};
-
 type Props = {
+  tag?: HTMLElement; // тег, по умолчанию div
   animationName?: AnimationTypes, //класс анимации     
   elements: number, // количество элементов анимации
   index: number, // индекс элемента
@@ -48,9 +38,10 @@ const props = withDefaults(defineProps<Props>(), {
   delay: 0,
   className: '',
   isActive: true,
+  tag: 'div',
 });
 
-const { animationName, elements, index, stepDelay, className, isActive, delay } = toRefs(props);
+const { animationName, elements, index, stepDelay, className, isActive, delay, tag } = toRefs(props);
 const emits = defineEmits(["callback"]);
 
 let animationDelay = index.value === 0 ? delay.value : (index.value + 1) * stepDelay.value + delay.value;

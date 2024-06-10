@@ -16,6 +16,7 @@ const songsList = ref(null)
 
 watch(()=> route.params.id, ()=> {
   songsList.value = playlistsStore.playlists.filter((item)=> item.id === route.params.id)[0]
+  // console.log('songsList.value', route)
 }, { immediate: true, deep: true })
 
 </script>

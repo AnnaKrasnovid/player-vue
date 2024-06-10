@@ -18,8 +18,8 @@
         cursor: pointer;
 
         &:hover {
-            background: rgba(28, 29, 31, 0.5);
-            color: $color-primary;
+            background: var(--primary);
+            color: var(--color-text);
         }
 
         &_type {
@@ -31,8 +31,8 @@
         }
 
         &_active {
-            background: rgba(28, 29, 31, 0.5);
-            color: $color-primary;
+            background: var(--primary);
+            color: var(--color-text);
         }
     }
 }

@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref, toRefs, defineEmits, withDefaults } from "vue";
+import { defineProps, toRefs, defineEmits, withDefaults } from "vue";
 
 type Props = {
   options: string;

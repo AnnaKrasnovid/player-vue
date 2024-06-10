@@ -10,7 +10,7 @@
         height: auto;
         border: 1px solid #fff;
         border-radius: 12px;
-
+position: relative;
         img {
             width: 100%;
             object-fit: cover;
@@ -20,7 +20,22 @@
     }
 
     &__title {
-        padding-top: 12px;
+         padding-top: 12px;
         font-size: 16px;
+    }
+
+  
+
+    &__button {
+        display: none !important;
+    }
+
+    &:hover {
+        .card-playlist__button {
+            display: flex !important;
+            position: absolute;
+            top: 5%;
+            right: 5%;
+        } 
     }
 }

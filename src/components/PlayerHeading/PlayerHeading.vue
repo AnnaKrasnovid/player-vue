@@ -13,6 +13,7 @@
 import { useActiveSong } from "@/store/activeSong";
 
 const { song } = useActiveSong();
+
 </script>
 
 <style scoped lang="scss">
