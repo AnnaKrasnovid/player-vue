@@ -1,0 +1,35 @@
+@import './variables.scss';
+
+.scroll {
+    overflow-y: auto;
+    overflow-x: hidden;
+     padding-right: 10px; //отступ скролла от содержимого слева
+    //два свойства ниже для браузера firefox
+    // scrollbar-width: thin;
+    // scrollbar-color: $color-primary rgba(0, 0, 0, 0.2);
+}
+
+.scroll::-webkit-scrollbar {
+    width: 6px; //ширина скролла  
+     height: 6px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background: var(--primary); //цвет  скролла     
+    border-radius: 10px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2); //цвет бокса скролла    
+    background-clip: content-box;
+    border-radius: 10px;
+    margin-top: 5px; // отступ вверху скролла от контейнера
+    margin-bottom: 5px; // отступ внизу скролла от контейнера  
+}
+
+.scroll::-webkit-scrollbar-button {
+    padding: 10px;
+    display: none;
+    height: 0;
+    width: 0
+}

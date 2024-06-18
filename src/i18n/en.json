@@ -14,7 +14,7 @@
         "en": "en",
         "ru": "ru"
     },
-    "newPlaylist": {
+    "addNewPlaylist": {
         "title": "Add a new playlist",
         "placeholder": "Enter the name of the album"
     },
@@ -26,5 +26,6 @@
         "button": "Select a file"
     },
     "buttonAdd": "Add",
-    "listen": "To listen"
+    "listen": "To listen",
+    "newPlaylist": "New playlist"
 }

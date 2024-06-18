@@ -8,6 +8,4 @@
 import LayoutPlayer from "@/Layout/LayoutPlayer.vue";
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

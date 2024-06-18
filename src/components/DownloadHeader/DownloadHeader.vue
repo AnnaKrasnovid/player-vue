@@ -1,14 +1,13 @@
 <template>
   <div class="add-playlist">
     <div class="add-playlist__image">
-      <!-- доработать картинку -->
-        <img  :src="coverPlaylist? coverPlaylist : Img"/>
+      <img :src="coverPlaylist ? coverPlaylist : Cover" />
       <VInputDownload
         v-if="type === 'playlist'"
         format="image"
-        @add-files="addCover"
         name="cover"
         className="cover-download"
+        @add-files="addCover"
       >
         <VIconAdd />
       </VInputDownload>
@@ -16,14 +15,16 @@
     <div class="add-playlist__box">
       <h2 class="title">
         {{ title }}
-        <br/>
-        <span v-if="type === 'songs'" class="download__span">"{{ playlist?.title}}"</span>
+        <br />
+        <span v-if="type === 'songs'" class="download__span"
+          >"{{ playlist?.title }}"</span
+        >
       </h2>
 
       <div v-if="type === 'playlist'" class="download__inputs">
         <VInput
           @change-input="emits('add-title', $event)"
-          :placeholder="t('newPlaylist.placeholder')"
+          :placeholder="t('addNewPlaylist.placeholder')"
         />
       </div>
     </div>
@@ -38,45 +39,45 @@ import { useI18n } from "vue-i18n";
 import VInputDownload from "@/components/UI/VInputDownload/VInputDownload.vue";
 import VInput from "@/components/UI/VInput/VInput.vue";
 import VIconAdd from "../UI/VIcons/VIconAdd.vue";
-import Img from "@/assets/images/images/cover.png";
+import Cover from "@/assets/images/covers/cover3.jpg";
 
-import { usePlaylists } from "@/store/playlists";
-
-interface Props  {
+interface Props {
   title: string;
   type: "songs" | "playlist";
+  list: any;
 }
 
 const emits = defineEmits(["add-title", "add-files"]);
 const props = defineProps<Props>();
 
-const { title, type } = toRefs(props);
+const { title, type, list } = toRefs(props);
 
-const { t } = useI18n()
-const route = useRoute()
-const { playlists } = usePlaylists();
+const { t } = useI18n();
+const route = useRoute();
 
-const playlist = ref()
+const playlist = ref();
 const coverPlaylist = ref<string>("");
 
 const addCover = (cover) => {
   coverPlaylist.value = URL.createObjectURL(cover[0]);
-  emits('add-files', coverPlaylist.value)
+  emits("add-files", coverPlaylist.value);
 };
 
-function getCover() {
-  if(type.value === 'songs'){
-    playlist.value = playlists.filter(item=> item.id === route.query.playlistId)[0]
-    coverPlaylist.value = playlist.value?.cover  
-  }  
-  if(type === 'playlist') {
-    coverPlaylist.value = Img
+const getCover = () => {
+  if (type.value === "songs") {
+    playlist.value = list.value.filter(
+      (item) => item.id === route.query.playlistId,
+    )[0];
+    coverPlaylist.value = playlist.value?.cover;
+  }
+  if (type === "playlist") {
+    coverPlaylist.value = Cover;
   }
 }
 
-onMounted(()=> {
-  getCover()
-})
+onMounted(() => {
+  getCover();
+});
 </script>
 
 <style scoped lang="scss">

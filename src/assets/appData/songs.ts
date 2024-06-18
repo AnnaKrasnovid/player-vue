@@ -5,11 +5,9 @@ import AudioTwo from '@/assets/audio/allthat.mp3';
 //@ts-ignore
 import AudioThree from '@/assets/audio/elevate.mp3';
 //@ts-ignore
-import AudioFour from '@/assets/audio/Rammstein_-_Du_Hast_63121920.mp3';
+import Cover1 from '../images/covers/cover1.jpg'
 //@ts-ignore
-import Img from '../images/covers/adele.jpg'
-
-// import { SongInt } from '../../types/SongInt';
+import Cover2 from '../images/covers/cover2.jpg'
 
 export const songs: Array<any> = [  
   {
@@ -17,53 +15,20 @@ export const songs: Array<any> = [
     audio: AudioOne,
     author: 'Benjamin Tissot',
     title: 'Adventure',
-    cover: Img,
+    cover: Cover1,
   },
   {
     id: 2,
     audio: AudioTwo,
     author: 'Benjamin Tissot',
     title: 'Allthat',
-    cover: '',
+    cover: Cover2,
   },
   {
     id: 3,
     audio: AudioThree,
     author: 'Benjamin Tissot',
     title: 'Elevate',
-    cover: '',
-  },
-  // {
-  //   id: 4,
-  //   audio: AudioFour,
-  //   author: 'Rammstein',
-  //   title: 'Du Hast',
-  //   cover: '',
-  // },
+    cover: Cover2,
+  },  
 ]
-export const songs2: Array<any> = [  
-  {
-    id: 5,
-    audio: AudioThree,
-    author: 'Benjamin Tissot',
-    title: 'Elevate',
-    cover: '',
-  },
-  {
-    id: 6,
-    audio: AudioFour,
-    author: 'Rammstein',
-    title: 'Du Hast',
-    cover: '',
-  },
-]
-
-// export const songs_two: Array<SongInt> = [  
-//     {
-//         id: 1,
-//         audio: AudioOne,
-//         author: 'Benjamin Tissot',
-//         title: 'Adventure',
-//         cover: Img
-//     },    
-// ]

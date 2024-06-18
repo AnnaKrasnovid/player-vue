@@ -7,7 +7,6 @@
       <VInputDownload  @add-files="addFiles" format="audio" :name="type"/>
       <DownloadList :files="filesList" @delete-file="deleteFile" />
     </DownloadBox>
-    <!-- :disabled="isDisabledButton" -->
     <VButton class="button-download" @click="add" color="primary">
       {{ t('buttonAdd') }}
     </VButton>
@@ -17,14 +16,15 @@
 <script setup lang="ts">
 import { defineProps, toRefs, ref, defineEmits, withDefaults } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { useI18n } from "vue-i18n"
+import { useI18n } from "vue-i18n";
+import parse from 'id3-parser';
+import { convertFileToBuffer } from 'id3-parser/lib/util';
 
 import DownloadBox from "@/components/DownloadBox/DownloadBox.vue";
 import DownloadList from "@/components/DownloadList/DownloadList.vue";
 import VInputDownload from "@/components/UI/VInputDownload/VInputDownload.vue";
 import VButton from "@/components/UI/VButton/VButton.vue";
 
-import { getInfoFromAudio } from "@/helpers/getInfoFromAudio/getInfoFromAudio";
 import { SongInt } from "@/types/types";
 
 type Props = {
@@ -38,65 +38,52 @@ const props = withDefaults(defineProps<Props>(), {
 });
 const { type } = toRefs(props);
 
-const { t } = useI18n()
+const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
 
 const filesList = ref<Array<SongInt>>([]);
 
-function getNewSongs(files) {
-  const newFiles = [];
-
-  files.map((item) => {
-    const info = getInfoFromAudio(item.name);
-
-    newFiles.push({
-      id: item.size,
-      audio: URL.createObjectURL(item),
-      author: info.author,
-      title: info.title,
-      cover: "",
-    });
-  });
-
-  return newFiles;
+const addFiles = (filesObj: any) => {   
+  filesObj.map((i)=> {       
+    convertFileToBuffer(i)
+      .then(parse)
+      .then(tag => {
+        const songs=[]
+        const content = new Uint8Array(tag?.image?.data)
+        const image = new Blob([content.buffer], { type: 'image/png' } )
+        const  urlImg =  URL.createObjectURL(image) 
+       
+        if(i.type === 'audio/mpeg') {
+          songs.push({
+            id: i.size,
+            audio: URL.createObjectURL(i),
+            author: tag?.artist,
+            title: tag?.title,
+            cover: image.size? urlImg : null,
+            type: i.type,
+          }) 
+        }        
+          
+        filesList.value = [...filesList.value, ...songs];
+      })      
+  })  
 }
 
-function addFiles(files: any) {
-  const newFiles: Array<SongInt> = getNewSongs(files);
-  filesList.value = [...filesList.value, ...newFiles];
-}
-
-function deleteFile(id) {
+const deleteFile = (id) => {
   filesList.value = filesList.value.filter((item) => item.id !== id);
 }
 
-function add() {
-  emits("add", filesList.value);
-
+const add = () => {
   if (type.value === "songs") {
     router.push(`/playlist/${route.query.playlistId}`);
   } else if (type.value === 'playlist') {
     router.push(`/playlists`);
   }
+
+  emits("add", filesList.value);
 }
 
-// function disabledButton() {
-//   if (type === "playlist" && titlePlaylist.value.length === 0) {
-//     isDisabledButton.value = true;
-//   } else if (type === "songs" && filesList.value.length > 0) {
-//     isDisabledButton.value = true;
-//   } else {
-//     isDisabledButton.value = false;
-//   }
-// }
-
-// watch(
-//   () => [titlePlaylist.value, filesList.value],
-//   () => {
-//     disabledButton();
-//   },
-// );
 </script>
 
 <style scoped lang="scss">

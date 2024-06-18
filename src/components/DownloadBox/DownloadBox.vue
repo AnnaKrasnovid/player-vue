@@ -21,16 +21,17 @@ import { useI18n } from "vue-i18n";
 
 const emit = defineEmits(["add-files"]);
 
-const { t } = useI18n()
+const { t } = useI18n();
+
 const dragEnter = ref<boolean>(false);
 
-function overrideEventDefaults(event: any) {
+const overrideEventDefaults = (event: any) => {
   event.preventDefault();
   event.stopPropagation();
   dragEnter.value = true;
 }
 
-function handleDragAndDropFiles(event: any) {
+const handleDragAndDropFiles = (event: any) => {
   overrideEventDefaults(event);
   dragEnter.value = false;
 
@@ -40,6 +41,7 @@ function handleDragAndDropFiles(event: any) {
 
   emit("add-files", Object.values(event.dataTransfer.files));
 }
+
 </script>
 
 <style scoped lang="scss">

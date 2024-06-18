@@ -1,26 +1,24 @@
 <template>
   <div class="cover">
     <img
-      :src="song.activeSong?.cover ? song.activeSong.cover : ImagePlayer"
+      :src="cover"
       alt="Пластинка"
       class="cover__img"
       :class="{ 'cover__image_active': isPlaySong }"
     />
-    <!-- activeSong.cover ? activeSong.cover : ImagePlayer -->
   </div>
 </template>
 
 <script setup lang="ts">
-import ImagePlayer from "../../assets/images/images/cover.png";
-
-import { useActiveSong } from "@/store/activeSong";
+import { defineProps, toRefs } from "vue";
 
 type Props = {
-  isPlaySong: boolean
+  isPlaySong: boolean,
+  cover: string
 };
 
-const { song } = useActiveSong();
-
+const props = defineProps<Props>();
+const { isPlaySong, cover } = toRefs(props);
 </script>
 
 <style scoped lang="scss">

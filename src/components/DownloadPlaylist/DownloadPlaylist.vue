@@ -4,8 +4,9 @@
     @add="addPlaylist"
   >
     <DownloadHeader 
-      :title="t('newPlaylist.title')"
-      type="playlist" 
+    type="playlist" 
+      :title="t('addNewPlaylist.title')"
+      :list="playlists"
       @add-files="addCover"
       @add-title="addTitle" 
     />
@@ -21,20 +22,20 @@ import DownloadHeader from "@/components/DownloadHeader/DownloadHeader.vue";
 
 import { usePlaylists } from "@/store/playlists";
 
-const { t } = useI18n()
-const { addNewPlaylists } = usePlaylists()
+const { t } = useI18n();
+const { playlists, addNewPlaylists } = usePlaylists();
 
 const titlePlaylist = ref<string>("");
 const coverPlaylist = ref<string>("");
 
-function addPlaylist(playlist) {
+function addPlaylist(playlist) { 
   const newPlaylist = {
-    title: titlePlaylist.value,
+    title: titlePlaylist.value ? titlePlaylist.value : t('newPlaylist'),
     cover: coverPlaylist.value,
     songs: playlist,
   }
 
-  addNewPlaylists(newPlaylist)
+  addNewPlaylists(newPlaylist);
 }
 
 const addTitle = (event) => {

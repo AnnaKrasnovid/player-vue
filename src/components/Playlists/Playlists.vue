@@ -1,6 +1,6 @@
 <template>
   <VGrid>
-    <template #header>      
+    <template #header>
       <VHint :text="t('hintAddPlaylists')">
         <RouterLink to="/playlists/add" class="link-add">
           <VIconAdd />
@@ -16,7 +16,7 @@
           :key="playlist.id"
           class="playlists__item"
         >
-            <CardPlaylist :playlist="playlist" @delete="deleteList"/>         
+          <CardPlaylist :playlist="playlist" @delete="deleteList" />
         </li>
       </ul>
     </template>
@@ -39,28 +39,19 @@ const { playlists, deletePlaylist } = usePlaylists();
 const idPlaylist = ref<number | string | null>(null);
 
 const deleteList = (id) => {
-  idPlaylist.value = id;  
-}
+  idPlaylist.value = id;
+};
 
-watch(()=> idPlaylist.value, ()=> {
-  deletePlaylist(idPlaylist.value);
-}, { deep: true })
-
+watch(
+  () => idPlaylist.value,
+  () => {
+    deletePlaylist(idPlaylist.value);
+    idPlaylist.value = null;
+  },
+  { deep: true },
+);
 </script>
 
 <style lang="scss">
 @import "./Playlists.scss";
-
-.link-add {
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 40px;
-  background: rgba(0, 0, 0, .25);
-    
-    padding: 6px;
-    border: var(--border);
-    border-radius: 6px;
-}
 </style>

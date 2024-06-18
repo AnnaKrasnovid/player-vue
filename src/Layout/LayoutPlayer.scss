@@ -40,6 +40,9 @@
         overflow: hidden;
     }
 }
+.page {
+    padding: 36px 24px 48px; //$padding-container
+}
 
 @media(max-width: 1580px) {
     .layout {

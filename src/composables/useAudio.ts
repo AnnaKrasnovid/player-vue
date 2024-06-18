@@ -1,6 +1,6 @@
 import { watch, ref, nextTick } from 'vue';
 
-import { useActiveSong } from '@/store/activeSong'
+import { useActiveSong } from '@/store/activeSong';
 export interface AudioInt {
   refAudio: any,
   volume:number,
@@ -19,7 +19,7 @@ export interface SongInt {
 }
 
 export function useAudio() {
-  const { changePlaybackSong, song } = useActiveSong()
+  const { changePlaybackSong, song } = useActiveSong();
 
   const refAudio = ref<HTMLAudioElement>();
   const volume = ref<number>(0.1);
@@ -59,12 +59,12 @@ export function useAudio() {
 
   watch(() => song.activeSong, () => { 
     // если трек воспроизводится, 
-    // то при переключении трека/или текущий трек закончится,  
-    // начнется воспроизведение
+    // то при переключении трека/или текущий трек закончился,  
+    // начнется воспроизведение следующего трека
     nextTick(() => {
       if (song.isPlaySong && refAudio.value) {
         playSong() 
-      }   
+      }
     })
   }, { deep:true });
 

@@ -5,6 +5,7 @@ const initialState = {
   duration: 0,
   currentTime: 0,
   isPlaySong: false,
+  // audioRef: {},
 }
 
 export const useActiveSong = defineStore('songStore', {

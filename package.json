@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "id3-parser": "^3.0.0",
     "pinia": "^2.1.7",
     "vue": "^3.2.13",
     "vue-i18n": "^9.13.1",

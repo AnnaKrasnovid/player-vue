@@ -44,8 +44,11 @@ const props = withDefaults(defineProps<Props>(), {
 const { animationName, elements, index, stepDelay, className, isActive, delay, tag } = toRefs(props);
 const emits = defineEmits(["callback"]);
 
-let animationDelay = index.value === 0 ? delay.value : (index.value + 1) * stepDelay.value + delay.value;
-const aninationDuration = elements.value * stepDelay.value;
+let animationDelay = computed(()=> {
+  return index.value === 0 ? delay.value : (index.value + 1) * stepDelay.value + delay.value
+}) 
+
+const aninationDuration = computed(()=> elements.value * stepDelay.value);
 
 </script>
 

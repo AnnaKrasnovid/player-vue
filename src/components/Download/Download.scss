@@ -3,9 +3,6 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-auto-rows: min-content 1fr min-content;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: space-between;
     gap: 32px;
 
     &__title {

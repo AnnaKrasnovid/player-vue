@@ -1,11 +1,12 @@
 <template>
-  <Download     
-    type="songs" 
+  <Download 
+    type="songs"
     @add="addSongs"
   >
-    <DownloadHeader 
-      :title="t('newSongs.title')" 
-      type="songs" 
+    <DownloadHeader
+      type="songs"
+      :title="t('newSongs.title')"
+      :list="playlistsStore.playlists"
     />
   </Download>
 </template>
@@ -24,7 +25,7 @@ const { t } = useI18n();
 const route = useRoute();
 const playlistsStore = usePlaylists();
 
-function addSongs(files: NewPlaylistInt) {
+const addSongs = (files: NewPlaylistInt) => {
   playlistsStore.addNewSongs(route.query.playlistId, files);
 }
 

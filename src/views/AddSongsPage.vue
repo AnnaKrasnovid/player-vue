@@ -6,6 +6,4 @@
 import DownloadSongs from "@/components/DownloadSongs/DownloadSongs.vue";
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

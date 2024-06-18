@@ -30,24 +30,15 @@ const props = withDefaults(defineProps<Props>(), {
   format: "audio",
   label: "",
 });
+
 const { format, label } = toRefs(props);
 
 const { t } = useI18n();
 
-function handleChange(e) {
+async function handleChange(e) {  
   const filesObj = Object.values(e.target.files);
+
   emit("add-files", filesObj);
-
-  // const fData = event.target.files[0];
-  // const reader = new FileReader();
-
-  // reader.onload = (event) => {
-  //   fileData.value = event.target.result;
-  //   // console.log('event.target.result', fileData.value )
-  // };
-
-  // // reader2.value = reader.readAsDataURL(fData);
-  // console.log( reader.readAsDataURL(event.target.files[0]))
 }
 </script>
 

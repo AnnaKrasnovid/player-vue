@@ -12,6 +12,7 @@
 
 <script setup lang="ts">
 import { defineProps, defineEmits, withDefaults, toRefs } from "vue";
+
 import VProgress from "@/components/UI/VProgress/VProgress.vue";
 
 interface Props {
@@ -27,7 +28,6 @@ const { volume } = toRefs(props);
 
 </script>
 
-<style scoped lang="scss">
-  
+<style scoped lang="scss"> 
 </style>
 

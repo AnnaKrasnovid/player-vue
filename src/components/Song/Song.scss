@@ -20,6 +20,10 @@
     &:hover {
         transition: transform 0.3s linear;
         box-shadow: 0px 7px 16px rgba(0, 0, 0, 0.8);
+
+        .song__button {
+            display: flex !important;
+        }
     }
 
     &__img {
@@ -48,5 +52,11 @@
         line-height: 24px;
     }
 
-    &__box {}
+    &__box {
+        align-items: center;
+    }
+
+    &__button {
+        display: none !important;
+    }
 }

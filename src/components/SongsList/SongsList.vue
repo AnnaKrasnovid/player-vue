@@ -10,7 +10,7 @@
       animationName="animation-position"
       @callback="changeSong(item.id)"
     >
-      <Song :item="item" />
+      <Song :item="item" @delete="emits('delete', item.id)" />
     </Animation>
   </ul>
 </template>
@@ -29,9 +29,9 @@ type Props = {
 const props = defineProps<Props>();
 const { list, isActive } = toRefs(props);
 
-const emits = defineEmits(["change-song"]);
+const emits = defineEmits(["change-song", "delete"]);
 
-function changeSong(id) {
+const changeSong = (id) => {
   emits("change-song", id);
 }
 </script>

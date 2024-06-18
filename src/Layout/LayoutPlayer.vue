@@ -1,5 +1,6 @@
 <template >
-  <div class="root" ref="refRoot">
+  <div class="root" ref="refRoot" >
+    <!-- :style="{'background-image': `url(${song?.activeSong?.cover})`}" -->
     <div class="main-page" >
       <div class="layout">
         <TheHeader :refRoot="refRoot" />
@@ -19,16 +20,17 @@
 </template>
 
 <script setup lang="ts">
-import TheHeader from "@/components/TheHeader/TheHeader.vue";
-import Player from "@/components/Player/Player.vue";
 import { ref } from "vue";
 
+import TheHeader from "@/components/TheHeader/TheHeader.vue";
+import Player from "@/components/Player/Player.vue";
+import { useActiveSong } from "@/store/activeSong" 
+
 const refRoot = ref<HTMLElement>();
+
+const { song } = useActiveSong()
 </script>
 
 <style lang="scss" >
 @import './LayoutPlayer.scss';
-.page {
-    padding: 36px 24px 48px; //$padding-container
-}
 </style>

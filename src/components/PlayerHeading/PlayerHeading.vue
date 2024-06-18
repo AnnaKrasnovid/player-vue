@@ -1,18 +1,24 @@
 <template>
   <div className="heading">
     <h1 className="heading__name">
-      {{ song.activeSong?.author ? song.activeSong.author : "" }}
+      {{ author ? author : "" }}
     </h1>
     <p className="heading__title">
-      {{ song.activeSong?.title ? song.activeSong.title : "" }}
+      {{ title ? title : "" }}
     </p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useActiveSong } from "@/store/activeSong";
+import { defineProps, toRefs } from "vue";
 
-const { song } = useActiveSong();
+type Props = {
+  author: string;
+  title: string
+};
+
+const props = defineProps<Props>();
+const { author, title } = toRefs(props);
 
 </script>
 

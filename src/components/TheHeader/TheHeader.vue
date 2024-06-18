@@ -31,6 +31,7 @@ import { useI18n } from "vue-i18n";
 import VHint from "@/components/UI/VHint/VHint.vue";
 import VSelect from "@/components/UI/VSelect/VSelect.vue";
 import { useSwitchSettings } from "@/composables/useSwitchSettings"; 
+import { useSettingsStore } from "@/store/settingsStore";
 
 type Props = {
   refRoot: any;
@@ -40,7 +41,7 @@ const props = defineProps<Props>();
 const { refRoot } = toRefs(props);
 
 const { t, locale } = useI18n()
-
+const { changeTheme } = useSettingsStore()
 const switchTheme = useSwitchSettings(refRoot, 'theme');
 const switchLang = useSwitchSettings(refRoot, 'lang');
 
@@ -79,7 +80,9 @@ const lang = computed(() =>[
 const handleChangeOptions =(setting, option)=> {
   if(setting === 'theme') {
     switchTheme.changeSetting(option);
+    changeTheme(option)
   } 
+
   if (setting === 'lang') {
     switchLang.changeSetting(option);
     locale.value = option;
@@ -90,17 +93,4 @@ const handleChangeOptions =(setting, option)=> {
 
 <style scoped lang="scss">
   @import './TheHeader.scss'; 
-
-  .link {
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 40px;
-  background: rgba(0, 0, 0, .25);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 6px 16px;
-    
-    border-radius: 6px;
-}
 </style>

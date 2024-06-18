@@ -14,6 +14,7 @@
         </VButton>
       </div>
     </div>
+    <VError :error="error" />
   </div>
 </template>
 
@@ -22,18 +23,19 @@ import { defineProps, toRefs, defineEmits } from "vue";
 
 import VButton from "@/components/UI/VButton/VButton.vue";
 import IconDelete from "@/components/UI/VIcons/IconDelete.vue";
+import VError from "@/components/UI/VError/VError.vue";
 
 import { SongInt } from "@/types/types";
 
 type Props = {
-  file?: Array<SongInt>;
+  file?: SongInt;
+  error?: string;
 };
 
 const props = defineProps<Props>();
 const emits = defineEmits(["delete-file"]);
 
-const { file } = toRefs(props);
-
+const { file, error } = toRefs(props);
 </script>
 
 <style scoped lang="scss">

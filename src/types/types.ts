@@ -15,5 +15,6 @@ export interface SongInt {
   audio: string,
   author: string,
   title: string,
-  cover: string,
+  cover: string | null,
+  type: string
 }

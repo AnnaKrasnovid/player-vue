@@ -6,10 +6,10 @@
 
     <div class="input-box__container">
       <input
-        v-model="value"
+        v-model="localValue"
         :type="type"
         :placeholder="placeholder"
-        @input="emits('change-input', value)"
+        @input="emits('change-input', localValue)"
         class="input-box__input"
       />
       <button
@@ -53,26 +53,14 @@ const props = withDefaults(defineProps<Props>(), {
 
 const { type, placeholder, title } = toRefs(props);
 
-const value = ref<string>("");
+const localValue = ref<string>("");
 const error = ref<string>("");
 
-const valueLength = computed(() => value.value.length);
+const valueLength = computed(() => localValue.value.length);
 
 const clearInput = () => {
-  value.value = "";
+  localValue.value = "";
 };
-
-watch(
-  () => value.value,
-  () => {
-    // TODO: доработать инпут, показ ошибок
-    if (!value.value.length) {
-      error.value = "Поле не должно быть пустым";
-    } else {
-      error.value = "";
-    }
-  },
-);
 
 </script>
 

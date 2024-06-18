@@ -3,9 +3,7 @@
     ref="refElement"
     :class="[
       'tooltip',
-      {
-        'tooltip_active': isOpen,
-      },
+      {'tooltip_active': isOpen},
     ]"
   >
     <slot />
