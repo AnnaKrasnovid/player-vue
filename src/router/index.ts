@@ -11,7 +11,7 @@ const routes: Array<RouteRecordRaw> = [
     component: PlaylistPage,
   },
   {
-    path: '/playlists',
+    path: '/', // playlists
     name: 'playlists',
     component: PlaylistsPage,
   },
